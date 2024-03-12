@@ -1,0 +1,68 @@
+{
+  "build": {
+    "beforeBuildCommand": "pnpm vite:build",
+    "beforeDevCommand": "pnpm vite:dev",
+    "devPath": "http://localhost:1420",
+    "distDir": "../dist"
+  },
+  "package": {
+    "productName": "Tauri Vue Template",
+    "version": "0.4.0"
+  },
+  "tauri": {
+    "allowlist": {
+      "all": true
+    },
+    "bundle": {
+      "active": true,
+      "category": "DeveloperTool",
+      "copyright": "",
+      "deb": {
+        "depends": []
+      },
+      "externalBin": [],
+      "icon": [
+        "icons/32x32.png",
+        "icons/128x128.png",
+        "icons/128x128@2x.png",
+        "icons/icon.icns",
+        "icons/icon.ico"
+      ],
+      "identifier": "net.uninen.dev",
+      "longDescription": "",
+      "macOS": {
+        "entitlements": null,
+        "exceptionDomain": "",
+        "frameworks": [],
+        "providerShortName": null,
+        "signingIdentity": null
+      },
+      "resources": [],
+      "shortDescription": "",
+      "targets": "all",
+      "windows": {
+        "certificateThumbprint": null,
+        "digestAlgorithm": "sha256",
+        "timestampUrl": ""
+      }
+    },
+    "security": {
+      "csp": "script-src 'unsafe-eval' 'self'; default-src blob: data: filesystem: ws: wss: http: https: tauri: 'unsafe-eval' 'unsafe-inline' 'self'; img-src asset: http: https: data: 'self'; worker-src blob: data: filesystem: ws: wss: http: https: tauri: 'unsafe-eval' 'unsafe-inline' 'self';"
+    },
+    "updater": {
+      "active": false
+    },
+    "windows": [
+      {
+        "decorations": true,
+        "fullscreen": false,
+        "height": 600,
+        "hiddenTitle": true,
+        "resizable": true,
+        "title": "Tauri Vue Template",
+        "titleBarStyle": "Overlay",
+        "width": 800
+      }
+    ]
+  }
+}
