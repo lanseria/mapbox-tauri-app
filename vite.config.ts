@@ -18,6 +18,9 @@ export default defineConfig({
         '@vueuse/core',
       ],
       dts: './src/auto-imports.d.ts',
+      dirs: [
+        './src/composables',
+      ],
     }),
     Components({
       dts: './src/components.d.ts',
@@ -30,6 +33,9 @@ export default defineConfig({
     }),
     Unocss(),
   ],
+  define: {
+    OS_PLATFORM: `"${process.platform}"`,
+  },
   clearScreen: false,
   envPrefix: ['VITE_', 'TAURI_'],
   server: {

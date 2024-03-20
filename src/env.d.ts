@@ -11,3 +11,8 @@ interface Window {
   map: mapboxgl.Map
   draw: MapboxDraw
 }
+
+/**
+ * defines in `vite.config.ts`
+ */
+declare const OS_PLATFORM: Platform
