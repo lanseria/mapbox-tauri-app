@@ -1,11 +1,11 @@
 [package]
-name = "tauri_vue_template"
+name = "mapbox_tauri_app"
 version = "1.0.0"
-description = "A Tauri App"
-authors = ["Ville Säävuori"]
+description = "Mapbox Tauri App"
+authors = ["lanseria"]
 license = "MIT"
-repository = "https://github.com/Uninen/tauri-vue-template"
-default-run = "tauri_vue_template"
+repository = "https://github.com/lanseria/mapbox-tauri-app"
+default-run = "mapbox_tauri_app"
 edition = "2021"
 
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html

@@ -21,13 +21,13 @@ const hoverClass = computed(() => {
 </template>
 
 <style lang="css" scoped>
-.default-hover {
+.default-hover:deep(canvas) {
   @apply cursor-default;
 }
-.point-hover,
-.line-hover,
-.polygon-hover,
-.circle-hover {
+.point-hover:deep(canvas),
+.line-hover:deep(canvas),
+.polygon-hover:deep(canvas),
+.circle-hover:deep(canvas) {
   @apply cursor-crosshair;
 }
 </style>

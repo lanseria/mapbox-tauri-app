@@ -34,3 +34,7 @@ cd src-tauri && cargo update
 
 1. 创建 icon
 2. 创建 mouseState: default/point/line/polygon
+3. 创建 point 首先生成 marker
+4. 结束画点, marker 转为 featureCollection 中的 type 为 Point 的数据
+5. 同时，将默认点属性赋值在 Point Properties 里，与此同时命名随机
+6. 定义 sessionDrawPointList localDrawFeatureCollection

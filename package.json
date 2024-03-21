@@ -18,6 +18,7 @@
     "@arco-design/web-vue": "^2.55.0",
     "@mapbox/mapbox-gl-language": "^1.0.1",
     "@tauri-apps/api": "^1.5.3",
+    "@turf/turf": "^6.5.0",
     "@vueuse/core": "^10.9.0",
     "lodash-es": "^4.17.21",
     "mapbox-gl": "^3.2.0",
