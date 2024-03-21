@@ -1,7 +1,7 @@
 {
-  "name": "arco-uno-tauri-app-template-builder",
+  "name": "mapbox-tauri-app",
   "type": "module",
-  "version": "0.0.0",
+  "version": "1.0.0",
   "private": true,
   "scripts": {
     "dev": "cross-env RUST_BACKTRACE=1 concurrently -k \"tauri dev\"",

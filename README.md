@@ -1,5 +1,7 @@
 # Mapbox Tauri App
 
+<img width="128" alt="app-icon" src="./app-icon.png">
+
 > [!warning]
 >
 > # NOTICE 注意

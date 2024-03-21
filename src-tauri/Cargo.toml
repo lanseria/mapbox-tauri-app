@@ -1,6 +1,6 @@
 [package]
 name = "tauri_vue_template"
-version = "0.4.0"
+version = "1.0.0"
 description = "A Tauri App"
 authors = ["Ville Säävuori"]
 license = "MIT"

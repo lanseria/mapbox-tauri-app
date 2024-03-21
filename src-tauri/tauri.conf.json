@@ -6,8 +6,8 @@
     "distDir": "../dist"
   },
   "package": {
-    "productName": "Tauri Vue Template",
-    "version": "0.4.0"
+    "productName": "Mapbox Tauri App",
+    "version": "1.0.0"
   },
   "tauri": {
     "allowlist": {
@@ -28,7 +28,7 @@
         "icons/icon.icns",
         "icons/icon.ico"
       ],
-      "identifier": "net.uninen.dev",
+      "identifier": "com.ivhik.tauri-app",
       "longDescription": "",
       "macOS": {
         "entitlements": null,
@@ -59,7 +59,7 @@
         "height": 600,
         "hiddenTitle": true,
         "resizable": true,
-        "title": "Tauri Vue Template",
+        "title": "Mapbox Tauri App",
         "titleBarStyle": "Overlay",
         "width": 800
       }
