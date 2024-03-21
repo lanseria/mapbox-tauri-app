@@ -25,7 +25,5 @@ onMounted(() => {
 </script>
 
 <template>
-  <div ref="mapContainer" class="relative h-full w-full">
-    <Titlebar />
-  </div>
+  <div ref="mapContainer" class="relative h-full w-full" />
 </template>

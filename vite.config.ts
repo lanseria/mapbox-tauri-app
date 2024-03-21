@@ -1,4 +1,5 @@
 import process from 'node:process'
+import path from 'node:path'
 import vue from '@vitejs/plugin-vue'
 import AutoImport from 'unplugin-auto-import/vite'
 import Components from 'unplugin-vue-components/vite'
@@ -8,6 +9,13 @@ import Unocss from 'unocss/vite'
 
 // See https://vitejs.dev/config/
 export default defineConfig({
+
+  resolve: {
+    alias: {
+      '~/': `${path.resolve(__dirname, 'src')}/`,
+      'vue': 'vue/dist/vue.esm-bundler.js',
+    },
+  },
   plugins: [
     vue(),
     // See https://github.com/unplugin/unplugin-auto-import

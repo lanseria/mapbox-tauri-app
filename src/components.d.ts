@@ -9,5 +9,6 @@ declare module 'vue' {
   export interface GlobalComponents {
     MapBox: typeof import('./components/MapBox.vue')['default']
     Titlebar: typeof import('./components/Titlebar.vue')['default']
+    ToolBar: typeof import('./components/ToolBar.vue')['default']
   }
 }

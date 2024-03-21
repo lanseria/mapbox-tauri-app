@@ -26,6 +26,7 @@
   },
   "devDependencies": {
     "@antfu/eslint-config": "^2.8.3",
+    "@iconify-json/carbon": "^1.1.31",
     "@tauri-apps/cli": "^1.5.11",
     "@types/mapbox-gl": "^3.1.0",
     "@types/node": "^20.11.30",

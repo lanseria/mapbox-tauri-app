@@ -56,8 +56,10 @@
       {
         "decorations": true,
         "fullscreen": false,
-        "height": 600,
+        "height": 642,
         "hiddenTitle": true,
+        "minHeight": 520,
+        "minWidth": 600,
         "resizable": true,
         "title": "Mapbox Tauri App",
         "titleBarStyle": "Overlay",

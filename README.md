@@ -29,3 +29,8 @@ upgrade cargo package version
 ```
 cd src-tauri && cargo update
 ```
+
+## Develop Step
+
+1. 创建 icon
+2. 创建 mouseState: default/point/line/polygon

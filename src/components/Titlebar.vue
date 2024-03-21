@@ -5,10 +5,10 @@ const OS = getSystem()
 </script>
 
 <template>
-  <div data-tauri-drag-region class="fixed left-0 right-0 top-0 h-30px select-none bg-blue-4">
+  <div data-tauri-drag-region class="h-30px w-full select-none border-b-1px border-gray-1 bg-white">
     <template v-if="OS !== 'macos'">
       <div class="absolute left-1/2 font-bold leading-30px -translate-x-1/2">
-        Mapbox
+        Mapbox Tauri App
       </div>
       <div class="flex justify-end">
         <div id="titlebar-minimize" class="titlebar-button" @click="appWindow.minimize()">
