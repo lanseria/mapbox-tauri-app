@@ -1,21 +1,11 @@
-import type { Marker } from 'mapbox-gl'
+import type { DrawPoint } from '~/types'
 
 export type MouseState = 'default' | 'point' | 'line' | 'polygon' | 'circle'
 /**
  * MouseState
  */
 export const sessionMouseState = useSessionStorage<MouseState>('sessionMouseState', 'default')
-export interface DrawPoint {
-  id: string
-  name: string
-  coords: number[]
-  color: string
-  size: number
-  textFillColor: string
-  textStrokeColor: string
-  textSize: number
-  _marker?: Marker
-}
+
 export function initDrawPoint(id: string, coords: number[]): DrawPoint {
   return {
     id,

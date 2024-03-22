@@ -11,6 +11,7 @@ const hoverClass = computed(() => {
     <Titlebar class="flex-none" />
     <div class="flex shrink grow basis-0 overflow-y-hidden">
       <ToolBar class="flex-none" />
+      <SourceBar class="flex-none" />
       <MapBox
         ref="hoverMapBoxRef" class="shrink grow basis-0 overflow-y-hidden" :class="{
           [hoverClass]: isHovered,
