@@ -26,9 +26,10 @@
     "vue": "^3.4.21"
   },
   "devDependencies": {
-    "@antfu/eslint-config": "^2.8.3",
+    "@antfu/eslint-config": "^2.9.0",
     "@iconify-json/carbon": "^1.1.31",
     "@tauri-apps/cli": "^1.5.11",
+    "@types/lodash-es": "^4.17.12",
     "@types/mapbox-gl": "^3.1.0",
     "@types/node": "^20.11.30",
     "@unocss/eslint-plugin": "^0.58.6",

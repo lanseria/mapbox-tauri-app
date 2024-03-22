@@ -7,6 +7,13 @@ export {}
 
 declare module 'vue' {
   export interface GlobalComponents {
+    AColorPicker: typeof import('@arco-design/web-vue')['ColorPicker']
+    AForm: typeof import('@arco-design/web-vue')['Form']
+    AFormItem: typeof import('@arco-design/web-vue')['FormItem']
+    AInput: typeof import('@arco-design/web-vue')['Input']
+    AInputNumber: typeof import('@arco-design/web-vue')['InputNumber']
+    ATag: typeof import('@arco-design/web-vue')['Tag']
+    IconBgColors: typeof import('@arco-design/web-vue/es/icon')['IconBgColors']
     IconBtn: typeof import('./components/IconBtn.vue')['default']
     MapBox: typeof import('./components/MapBox.vue')['default']
     Modal: typeof import('./components/Modal.vue')['default']

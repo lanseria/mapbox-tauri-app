@@ -22,7 +22,6 @@ defineProps({
 
         <div class="modal-footer">
           <slot name="footer">
-            default footer
             <button
               class="modal-default-button"
               @click="$emit('close')"
@@ -39,7 +38,7 @@ defineProps({
 <style>
 .modal-mask {
   position: fixed;
-  z-index: 9998;
+  z-index: 1000;
   top: 0;
   left: 0;
   width: 100%;
@@ -61,7 +60,7 @@ defineProps({
 
 .modal-header h3 {
   margin-top: 0;
-  color: #42b983;
+  @apply text-blue-5;
 }
 
 .modal-body {

@@ -1,15 +1,27 @@
 <script lang="ts" setup>
+import _ from 'lodash-es'
+
 const showModal = ref(false)
+const featureForm = ref(initDrawPoint('', []))
 const computedDrawData = computed(() => {
   return localDrawFeatureCollection.value.features
 })
 function removeFeature(item: any) {
   localDrawFeatureCollection.value.features = localDrawFeatureCollection.value.features.filter(feature => feature.properties!.id !== item.properties.id)
-  loadDraw()
+  addDrawSource()
 }
-function editFeature(_item: any) {
+function editFeature(item: any) {
   console.warn('editFeature')
+  featureForm.value = _.cloneDeep(item.properties)
   showModal.value = true
+}
+
+function handleSubmit() {
+  const idx = localDrawFeatureCollection.value.features.findIndex(feature => feature.properties!.id === featureForm.value.id)
+  localDrawFeatureCollection.value.features[idx].properties = _.cloneDeep(featureForm.value)
+  console.warn(_.cloneDeep(featureForm.value))
+  showModal.value = false
+  addDrawSource()
 }
 </script>
 
@@ -42,11 +54,63 @@ function editFeature(_item: any) {
 
     <Teleport to="body">
       <!-- 使用这个 modal 组件，传入 prop -->
-      <modal :show="showModal" @close="showModal = false">
+      <Modal :show="showModal" @close="handleSubmit">
         <template #header>
-          <h3>custom header</h3>
+          <h3>编辑点</h3>
         </template>
-      </modal>
+        <template #body>
+          <AForm size="mini" :model="featureForm" auto-label-width>
+            <AFormItem field="name" tooltip="Please enter name" label="name">
+              <AInput
+                v-model="featureForm.name"
+                placeholder="please enter your name..."
+              />
+            </AFormItem>
+            <AFormItem field="color" tooltip="Please enter color" label="color">
+              <AColorPicker v-model="featureForm.color" size="mini">
+                <ATag :color="featureForm.color">
+                  <template #icon>
+                    <IconBgColors style="color: #fff" />
+                  </template>
+                  {{ featureForm.color }}
+                </ATag>
+              </AColorPicker>
+            </AFormItem>
+            <AFormItem field="size" tooltip="Please enter size" label="size">
+              <AInputNumber
+                v-model="featureForm.size"
+                placeholder="please enter your size..."
+              />
+            </AFormItem>
+            <AFormItem field="textFillColor" tooltip="Please enter textFillColor" label="textFillColor">
+              <AColorPicker v-model="featureForm.textFillColor" size="mini">
+                <ATag :color="featureForm.textFillColor">
+                  <template #icon>
+                    <IconBgColors style="color: #fff" />
+                  </template>
+                  {{ featureForm.textFillColor }}
+                </ATag>
+              </AColorPicker>
+            </AFormItem>
+            <AFormItem field="textStrokeColor" tooltip="Please enter textStrokeColor" label="textStrokeColor">
+              <AColorPicker v-model="featureForm.textStrokeColor" size="mini">
+                <ATag :color="featureForm.textStrokeColor">
+                  <template #icon>
+                    <IconBgColors style="color: #fff" />
+                  </template>
+                  {{ featureForm.textStrokeColor }}
+                </ATag>
+              </AColorPicker>
+            </AFormItem>
+            <AFormItem field="textSize" tooltip="Please enter textSize" label="textSize">
+              <AInputNumber
+                v-model="featureForm.textSize"
+                placeholder="please enter your textSize..."
+              />
+            </AFormItem>
+          </AForm>
+        </template>
+      </Modal>
     </Teleport>
   </div>
 </template>

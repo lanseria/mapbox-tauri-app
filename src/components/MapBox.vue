@@ -49,7 +49,7 @@ onMounted(() => {
       localDrawFeatureCollection.value.features.push(
         turf.point([e.lngLat.lng, e.lngLat.lat], initDrawPoint(id, [e.lngLat.lng, e.lngLat.lat])),
       )
-      loadDraw()
+      addDrawSource()
       sessionMouseState.value = 'default'
     }
   })
