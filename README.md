@@ -30,6 +30,16 @@ upgrade cargo package version
 cd src-tauri && cargo update
 ```
 
+## 前言
+
+- 众所周知，如果要做一个桌面端的应用程序，还要适配windows与macos等一众操作系统，那只能只是跨平台的框架进行开发
+- 之前比较熟悉与流行的就是 electron 版本，大家熟悉的vscode就是应用的此框架
+- 之前做一个 electron 版本的 Gis 地图软件
+- 虽然此框架对于前端来说已于上手，但带来了很大的安装体积，也就是熟悉的chrome内核的浏览器
+- 然后最近又在重复练习 tauri，一个 rust 语言写的跨端框架，生成体积非常小，原理就是利用了各个操作系统的内核来减少安装体积
+- 我这里写了一个简单的 mapbox demo 来演示一下
+- 代码也是开源的，有兴趣的同学可以借鉴
+
 ## Develop Step
 
 1. 创建 icon
