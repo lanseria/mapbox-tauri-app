@@ -11,3 +11,11 @@ export interface DrawPoint {
   textSize: number
   _marker?: Marker
 }
+export interface DrawLine {
+  id: string
+  name: string
+  coords: number[]
+  color: string
+  width: number
+  opacity: number
+}

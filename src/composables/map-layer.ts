@@ -34,6 +34,38 @@ export function addDrawPointLayer() {
   })
 }
 
+export function addDrawLineLayer() {
+  const map = window.map
+  if (map.getLayer(MAP_DRAW_LINE_LAYER_NAME))
+    map.removeLayer(MAP_DRAW_LINE_LAYER_NAME)
+  map.addLayer({
+    id: MAP_DRAW_LINE_LAYER_NAME,
+    type: 'line',
+    source: MAP_DRAW_SOURCE_NAME,
+
+    layout: {
+      'line-cap': ['coalesce', ['get', 'line-cap'], 'round'],
+      'line-join': ['coalesce', ['get', 'line-cap'], 'round'],
+    },
+    paint: {
+      'line-color': ['coalesce', ['get', 'color'], '#000'],
+      'line-width': ['coalesce', ['get', 'width'], 2],
+      'line-opacity': ['coalesce', ['get', 'opacity'], 1],
+    },
+    filter: ['==', ['geometry-type'], 'LineString'],
+  })
+  map.on('click', MAP_DRAW_LINE_LAYER_NAME, (e) => {
+    console.warn(e)
+  })
+  map.on('mouseenter', MAP_DRAW_LINE_LAYER_NAME, (_e) => {
+    map.getCanvas().style.cursor = 'pointer'
+  })
+  map.on('mouseleave', MAP_DRAW_LINE_LAYER_NAME, (_e) => {
+    map.getCanvas().style.cursor = ''
+  })
+}
+
 export function addDrawLayer() {
   addDrawPointLayer()
+  addDrawLineLayer()
 }

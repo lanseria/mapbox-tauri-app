@@ -51,8 +51,16 @@ export function loadDraw() {
   addDrawLayer()
 }
 
+export function refreshPointColor() {
+  // 获取所有的点的颜色
+  const localColors = localDrawFeatureCollection.value.features.map((f: any) => f.properties.color)
+  const allColors = new Set([INIT_POINT_COLOR, ...localColors])
+  // 重新添加颜色点
+  for (const color of allColors)
+    addColorSymbol(color)
+}
+
 export function handleMapLoad(map: mapboxgl.Map) {
   console.warn('[handleMapLoad]', map)
-  addColorSymbol(INIT_POINT_COLOR)
   loadDraw()
 }

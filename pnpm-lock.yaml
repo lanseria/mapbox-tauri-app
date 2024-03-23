@@ -8,6 +8,9 @@ dependencies:
   '@arco-design/web-vue':
     specifier: ^2.55.0
     version: 2.55.0(vue@3.4.21)
+  '@mapbox/mapbox-gl-draw':
+    specifier: ^1.4.3
+    version: 1.4.3
   '@mapbox/mapbox-gl-language':
     specifier: ^1.0.1
     version: 1.0.1(mapbox-gl@3.2.0)
@@ -29,6 +32,9 @@ dependencies:
   nanoid:
     specifier: ^5.0.6
     version: 5.0.6
+  numeral:
+    specifier: ^2.0.6
+    version: 2.0.6
   vue:
     specifier: ^3.4.21
     version: 3.4.21(typescript@5.4.3)
@@ -49,9 +55,15 @@ devDependencies:
   '@types/mapbox-gl':
     specifier: ^3.1.0
     version: 3.1.0
+  '@types/mapbox__mapbox-gl-draw':
+    specifier: ^1.4.6
+    version: 1.4.6
   '@types/node':
     specifier: ^20.11.30
     version: 20.11.30
+  '@types/numeral':
+    specifier: ^2.0.5
+    version: 2.0.5
   '@unocss/eslint-plugin':
     specifier: ^0.58.6
     version: 0.58.6(eslint@8.57.0)(typescript@5.4.3)
@@ -60,10 +72,10 @@ devDependencies:
     version: 0.58.6
   '@vitejs/plugin-vue':
     specifier: ^5.0.4
-    version: 5.0.4(vite@5.2.2)(vue@3.4.21)
+    version: 5.0.4(vite@5.2.3)(vue@3.4.21)
   '@vue/devtools':
     specifier: ^7.0.20
-    version: 7.0.20(vite@5.2.2)(vue@3.4.21)
+    version: 7.0.20(vite@5.2.3)(vue@3.4.21)
   concurrently:
     specifier: ^8.2.2
     version: 8.2.2
@@ -87,7 +99,7 @@ devDependencies:
     version: 5.4.3
   unocss:
     specifier: ^0.58.6
-    version: 0.58.6(postcss@8.4.38)(vite@5.2.2)
+    version: 0.58.6(postcss@8.4.38)(vite@5.2.3)
   unplugin-auto-expose:
     specifier: 0.3.0
     version: 0.3.0
@@ -98,8 +110,8 @@ devDependencies:
     specifier: ^0.26.0
     version: 0.26.0(vue@3.4.21)
   vite:
-    specifier: ^5.2.2
-    version: 5.2.2(@types/node@20.11.30)(less@4.2.0)
+    specifier: ^5.2.3
+    version: 5.2.3(@types/node@20.11.30)(less@4.2.0)
   vue-tsc:
     specifier: ^2.0.7
     version: 2.0.7(typescript@5.4.3)
@@ -1036,6 +1048,38 @@ packages:
       '@jridgewell/sourcemap-codec': 1.4.15
     dev: true
 
+  /@mapbox/extent@0.4.0:
+    resolution: {integrity: sha1-PlkfMuHww5gchkI597CsBuYQ+Kk=}
+    dev: false
+
+  /@mapbox/geojson-area@0.2.2:
+    resolution: {integrity: sha1-GNeBSqNr8j+7zDefjiaiKSfevxA=}
+    dependencies:
+      wgs84: 0.0.0
+    dev: false
+
+  /@mapbox/geojson-coords@0.0.2:
+    resolution: {integrity: sha512-YuVzpseee/P1T5BWyeVVPppyfmuXYHFwZHmybkqaMfu4BWlOf2cmMGKj2Rr92MwfSTOCSUA0PAsVGRG8akY0rg==}
+    dependencies:
+      '@mapbox/geojson-normalize': 0.0.1
+      geojson-flatten: 1.1.1
+    dev: false
+
+  /@mapbox/geojson-extent@1.0.1:
+    resolution: {integrity: sha512-hh8LEO3djT4fqfr8sSC6wKt+p0TMiu+KOLMBUiFOyj+zGq7+IXwQGl0ppCVDkyzCewyd9LoGe9zAvDxXrLfhLw==}
+    hasBin: true
+    dependencies:
+      '@mapbox/extent': 0.4.0
+      '@mapbox/geojson-coords': 0.0.2
+      rw: 0.1.4
+      traverse: 0.6.8
+    dev: false
+
+  /@mapbox/geojson-normalize@0.0.1:
+    resolution: {integrity: sha1-HaHms6et060pkJsw9Dj2BYG3zYA=}
+    hasBin: true
+    dev: false
+
   /@mapbox/geojson-rewind@0.5.2:
     resolution: {integrity: sha512-tJaT+RbYGJYStt7wI3cq4Nl4SXxG8W7JDG5DMJu97V25RnbNg3QtQtf+KD+VLjNpWKYsRvXDNmNrBgEETr1ifA==}
     hasBin: true
@@ -1047,6 +1091,18 @@ packages:
   /@mapbox/jsonlint-lines-primitives@2.0.2:
     resolution: {integrity: sha1-zlblOfg1UrWNENZy6k1vya3HsjQ=}
     engines: {node: '>= 0.6'}
+    dev: false
+
+  /@mapbox/mapbox-gl-draw@1.4.3:
+    resolution: {integrity: sha512-03qIJgyGmm0IoTZbV/cfODru9jRGogi4LcQ3maxIJDKccq1gY3ofgt2UYPkeU143ElxitZahEythNQv1NpsLhg==}
+    dependencies:
+      '@mapbox/geojson-area': 0.2.2
+      '@mapbox/geojson-extent': 1.0.1
+      '@mapbox/geojson-normalize': 0.0.1
+      '@mapbox/point-geometry': 0.1.0
+      hat: 0.0.3
+      lodash.isequal: 4.5.0
+      xtend: 4.0.2
     dev: false
 
   /@mapbox/mapbox-gl-language@1.0.1(mapbox-gl@3.2.0):
@@ -2713,6 +2769,13 @@ packages:
       '@types/geojson': 7946.0.14
     dev: true
 
+  /@types/mapbox__mapbox-gl-draw@1.4.6:
+    resolution: {integrity: sha512-ajnIY/6pMjJhLyz5TUt1ukzs6rl9m/hItzw/b3Z0tQlrFq9vwDNPugLFOuNpLdmgA7emfMxlvxnLKbtE5/vtsw==}
+    dependencies:
+      '@types/geojson': 7946.0.14
+      '@types/mapbox-gl': 3.1.0
+    dev: true
+
   /@types/mdast@3.0.15:
     resolution: {integrity: sha512-LnwD+mUEfxWMa1QpDraczIn6k0Ee3SMicuYSSzS6ZYl2gKS09EClnJYGd8Du6rfc5r/GZEk5o1mRb8TaTj03sQ==}
     dependencies:
@@ -2727,6 +2790,10 @@ packages:
 
   /@types/normalize-package-data@2.4.4:
     resolution: {integrity: sha512-37i+OaWTh9qeK4LSHPsyRC7NahnGotNuZvjLSgcPzblpHB3rrCJxAOgI5gCdKm7coonsaX1Of0ILiTcnZjbfxA==}
+    dev: true
+
+  /@types/numeral@2.0.5:
+    resolution: {integrity: sha512-kH8I7OSSwQu9DS9JYdFWbuvhVzvFRoCPCkGxNwoGgaPeDfEPJlcxNvEOypZhQ3XXHsGbfIuYcxcJxKUfJHnRfw==}
     dev: true
 
   /@types/responselike@1.0.3:
@@ -3014,7 +3081,7 @@ packages:
     resolution: {integrity: sha512-zuVdFrMJiuCDQUMCzQaD6KL28MjnqqN8XnAqiEq9PNm/hCPTSGfrXCOfwj1ow4LFb/tNymJPwsNbVePc1xFqrQ==}
     dev: true
 
-  /@unocss/astro@0.58.6(vite@5.2.2):
+  /@unocss/astro@0.58.6(vite@5.2.3):
     resolution: {integrity: sha512-0BvbhEp5Ln6wFNnhISusB2hcfycWkdgnjlFMcLT69efvj4G39MzB6JYT/1qiidLfpj35HcqkpBz7TfZ4bUmOAw==}
     peerDependencies:
       vite: ^2.9.0 || ^3.0.0-0 || ^4.0.0 || ^5.0.0-0
@@ -3024,8 +3091,8 @@ packages:
     dependencies:
       '@unocss/core': 0.58.6
       '@unocss/reset': 0.58.6
-      '@unocss/vite': 0.58.6(vite@5.2.2)
-      vite: 5.2.2(@types/node@20.11.30)(less@4.2.0)
+      '@unocss/vite': 0.58.6(vite@5.2.3)
+      vite: 5.2.3(@types/node@20.11.30)(less@4.2.0)
     transitivePeerDependencies:
       - rollup
     dev: true
@@ -3223,7 +3290,7 @@ packages:
       '@unocss/core': 0.58.6
     dev: true
 
-  /@unocss/vite@0.58.6(vite@5.2.2):
+  /@unocss/vite@0.58.6(vite@5.2.3):
     resolution: {integrity: sha512-DPXCoYU/Ozqc/Jeptd41XvtW8MSgVxmtTyhpMAsm/hJuBfwIV7Fy3TZquf4V9BpaTb4ao1LVXzgXmVUmj2HXpA==}
     peerDependencies:
       vite: ^2.9.0 || ^3.0.0-0 || ^4.0.0 || ^5.0.0-0
@@ -3238,19 +3305,19 @@ packages:
       chokidar: 3.6.0
       fast-glob: 3.3.2
       magic-string: 0.30.8
-      vite: 5.2.2(@types/node@20.11.30)(less@4.2.0)
+      vite: 5.2.3(@types/node@20.11.30)(less@4.2.0)
     transitivePeerDependencies:
       - rollup
     dev: true
 
-  /@vitejs/plugin-vue@5.0.4(vite@5.2.2)(vue@3.4.21):
+  /@vitejs/plugin-vue@5.0.4(vite@5.2.3)(vue@3.4.21):
     resolution: {integrity: sha512-WS3hevEszI6CEVEx28F8RjTX97k3KsrcY6kvTg7+Whm5y3oYvcqzVeGCU3hxSAn4uY2CLCkeokkGKpoctccilQ==}
     engines: {node: ^18.0.0 || >=20.0.0}
     peerDependencies:
       vite: ^5.0.0
       vue: ^3.2.25
     dependencies:
-      vite: 5.2.2(@types/node@20.11.30)(less@4.2.0)
+      vite: 5.2.3(@types/node@20.11.30)(less@4.2.0)
       vue: 3.4.21(typescript@5.4.3)
     dev: true
 
@@ -3307,7 +3374,7 @@ packages:
       '@vue/compiler-dom': 3.4.21
       '@vue/shared': 3.4.21
 
-  /@vue/devtools-core@7.0.20(vite@5.2.2)(vue@3.4.21):
+  /@vue/devtools-core@7.0.20(vite@5.2.3)(vue@3.4.21):
     resolution: {integrity: sha512-JefAn0ljTUPtoEJ47PjEfcLQb9BVt3OH1R6aD8qZ7bNYwZH+xystXpVJ3pW+1iDnOXjfpLgc3bsHUZoxlfobpw==}
     dependencies:
       '@vue/devtools-kit': 7.0.20(vue@3.4.21)
@@ -3315,16 +3382,16 @@ packages:
       mitt: 3.0.1
       nanoid: 3.3.7
       pathe: 1.1.2
-      vite-hot-client: 0.2.3(vite@5.2.2)
+      vite-hot-client: 0.2.3(vite@5.2.3)
     transitivePeerDependencies:
       - vite
       - vue
     dev: true
 
-  /@vue/devtools-electron@7.0.20(vite@5.2.2)(vue@3.4.21):
+  /@vue/devtools-electron@7.0.20(vite@5.2.3)(vue@3.4.21):
     resolution: {integrity: sha512-5EeT8vttCvdrhiUH0rnn4dZz7040hKkNEZ+F9UPoGH56aeL0W1+9PUPc6nApG5S48ATYxfpWkP/Z1S4dDBkw6g==}
     dependencies:
-      '@vue/devtools-core': 7.0.20(vite@5.2.2)(vue@3.4.21)
+      '@vue/devtools-core': 7.0.20(vite@5.2.3)(vue@3.4.21)
       '@vue/devtools-shared': 7.0.20
       electron: 29.1.5
       execa: 8.0.1
@@ -3361,11 +3428,11 @@ packages:
       rfdc: 1.3.1
     dev: true
 
-  /@vue/devtools@7.0.20(vite@5.2.2)(vue@3.4.21):
+  /@vue/devtools@7.0.20(vite@5.2.3)(vue@3.4.21):
     resolution: {integrity: sha512-mu8bCUazW4C9YGMiO9yxkVjAU1IX5ZYJ3BZChDnIhvipxm0FB66u+aREfB+l/Uu1RutJePd5T2/xKSLjWfnAbw==}
     hasBin: true
     dependencies:
-      '@vue/devtools-electron': 7.0.20(vite@5.2.2)(vue@3.4.21)
+      '@vue/devtools-electron': 7.0.20(vite@5.2.3)(vue@3.4.21)
       '@vue/devtools-kit': 7.0.20(vue@3.4.21)
     transitivePeerDependencies:
       - bufferutil
@@ -4975,6 +5042,10 @@ packages:
       deep-equal: 1.1.2
     dev: false
 
+  /geojson-flatten@1.1.1:
+    resolution: {integrity: sha512-k/6BCd0qAt7vdqdM1LkLfAy72EsLDy0laNwX0x2h49vfYCiQkRc4PSra8DNEdJ10EKRpwEvDXMb0dBknTJuWpQ==}
+    dev: false
+
   /geojson-rbush@3.2.0:
     resolution: {integrity: sha512-oVltQTXolxvsz1sZnutlSuLDEcQAKYC/uXt9zDzJJ6bu0W+baTI8LZBaTup5afzibEH4N3jlq2p+a152wlBJ7w==}
     dependencies:
@@ -5239,6 +5310,10 @@ packages:
     engines: {node: '>= 0.4'}
     dependencies:
       function-bind: 1.1.2
+
+  /hat@0.0.3:
+    resolution: {integrity: sha1-uwFKnmSzeIrtgAWRdBPU/z1QLYo=}
+    dev: false
 
   /he@1.2.0:
     resolution: {integrity: sha512-F/1DnUGPopORZi0ni+CvrCgHQ5FyEAHRLSApuYWMmrbSwoN2Mn/7k+Gl38gJnR7yyDZk6WLXwiGod1JOWNDKGw==}
@@ -5707,6 +5782,10 @@ packages:
 
   /lodash.clonedeep@4.5.0:
     resolution: {integrity: sha512-H5ZhCF25riFd9uB5UCkVKo61m3S/xZk1x4wA6yp/L3RFP6Z/eHH1ymQcGLo7J3GMPfm0V/7m1tryHuGVxpqEBQ==}
+    dev: false
+
+  /lodash.isequal@4.5.0:
+    resolution: {integrity: sha1-QVxEePK8wwEgwizhDtMib30+GOA=}
     dev: false
 
   /lodash.merge@4.6.2:
@@ -6241,6 +6320,10 @@ packages:
 
   /number-precision@1.6.0:
     resolution: {integrity: sha512-05OLPgbgmnixJw+VvEh18yNPUo3iyp4BEWJcrLu4X9W05KmMifN7Mu5exYvQXqxxeNWhvIF+j3Rij+HmddM/hQ==}
+    dev: false
+
+  /numeral@2.0.6:
+    resolution: {integrity: sha1-StCAk21EPCVhrtnyGX7//iX05QY=}
     dev: false
 
   /object-assign@4.1.1:
@@ -6865,6 +6948,10 @@ packages:
       queue-microtask: 1.2.3
     dev: true
 
+  /rw@0.1.4:
+    resolution: {integrity: sha1-SQPL2AJIrg7eaFv1j9I2p6mymj4=}
+    dev: false
+
   /rw@1.3.3:
     resolution: {integrity: sha1-P4Yt+pGrdmsUiF700BEkv9oHT7Q=}
     dev: false
@@ -7370,6 +7457,11 @@ packages:
     engines: {node: '>=6'}
     dev: true
 
+  /traverse@0.6.8:
+    resolution: {integrity: sha512-aXJDbk6SnumuaZSANd21XAo15ucCDE38H4fkqiGsc3MhCK+wOlZvLP9cB/TvpHT0mOyWgC4Z8EwRlzqYSUzdsA==}
+    engines: {node: '>= 0.4'}
+    dev: false
+
   /tree-kill@1.2.2:
     resolution: {integrity: sha512-L0Orpi8qGpRG//Nd+H90vFB+3iHnue1zSSGmNOOCh1GLJ7rUKVwV2HvijphGQS2UmhUZewS9VgvxYIdgr+fG1A==}
     hasBin: true
@@ -7540,7 +7632,7 @@ packages:
     engines: {node: '>= 4.0.0'}
     dev: true
 
-  /unocss@0.58.6(postcss@8.4.38)(vite@5.2.2):
+  /unocss@0.58.6(postcss@8.4.38)(vite@5.2.3):
     resolution: {integrity: sha512-HBstDtC6KKD5yCYh5hHpPdHGZai0B/iLlDwkOIK+xfQYrvl8tNBvKfRz3xgiaI5MJ+fLmEOxbfXQIjleU1A0iA==}
     engines: {node: '>=14'}
     peerDependencies:
@@ -7552,7 +7644,7 @@ packages:
       vite:
         optional: true
     dependencies:
-      '@unocss/astro': 0.58.6(vite@5.2.2)
+      '@unocss/astro': 0.58.6(vite@5.2.3)
       '@unocss/cli': 0.58.6
       '@unocss/core': 0.58.6
       '@unocss/extractor-arbitrary-variants': 0.58.6
@@ -7571,8 +7663,8 @@ packages:
       '@unocss/transformer-compile-class': 0.58.6
       '@unocss/transformer-directives': 0.58.6
       '@unocss/transformer-variant-group': 0.58.6
-      '@unocss/vite': 0.58.6(vite@5.2.2)
-      vite: 5.2.2(@types/node@20.11.30)(less@4.2.0)
+      '@unocss/vite': 0.58.6(vite@5.2.3)
+      vite: 5.2.3(@types/node@20.11.30)(less@4.2.0)
     transitivePeerDependencies:
       - postcss
       - rollup
@@ -7715,16 +7807,16 @@ packages:
     engines: {node: '>= 0.8'}
     dev: true
 
-  /vite-hot-client@0.2.3(vite@5.2.2):
+  /vite-hot-client@0.2.3(vite@5.2.3):
     resolution: {integrity: sha512-rOGAV7rUlUHX89fP2p2v0A2WWvV3QMX2UYq0fRqsWSvFvev4atHWqjwGoKaZT1VTKyLGk533ecu3eyd0o59CAg==}
     peerDependencies:
       vite: ^2.6.0 || ^3.0.0 || ^4.0.0 || ^5.0.0-0
     dependencies:
-      vite: 5.2.2(@types/node@20.11.30)(less@4.2.0)
+      vite: 5.2.3(@types/node@20.11.30)(less@4.2.0)
     dev: true
 
-  /vite@5.2.2(@types/node@20.11.30)(less@4.2.0):
-    resolution: {integrity: sha512-FWZbz0oSdLq5snUI0b6sULbz58iXFXdvkZfZWR/F0ZJuKTSPO7v72QPXt6KqYeMFb0yytNp6kZosxJ96Nr/wDQ==}
+  /vite@5.2.3(@types/node@20.11.30)(less@4.2.0):
+    resolution: {integrity: sha512-+i1oagbvkVIhEy9TnEV+fgXsng13nZM90JQbrcPrf6DvW2mXARlz+DK7DLiDP+qeKoD1FCVx/1SpFL1CLq9Mhw==}
     engines: {node: ^18.0.0 || >=20.0.0}
     hasBin: true
     peerDependencies:
@@ -7847,6 +7939,10 @@ packages:
     resolution: {integrity: sha512-poXpCylU7ExuvZK8z+On3kX+S8o/2dQ/SVYueKA0D4WEMXROXgY8Ez50/bQEUmvoSMMrWcrJqCHuhAbsiwg7Dg==}
     dev: true
 
+  /wgs84@0.0.0:
+    resolution: {integrity: sha1-NP3FVZF7blfPKigu0ENxDASc3HY=}
+    dev: false
+
   /which@2.0.2:
     resolution: {integrity: sha512-BLI3Tl1TW3Pvl70l3yq3Y64i+awpwXqsGBYWkkqMtnbXgrMD+yj7rhW0kuEDxzJaYXGjEW5ogapKNMEKNMjibA==}
     engines: {node: '>= 8'}
@@ -7907,6 +8003,11 @@ packages:
     resolution: {integrity: sha512-QKxVRxiRACQcVuQEYFsI1hhkrMlrXHPegbbd1yn9UHOmRxY+si12nQYzri3vbzt8VdTTRviqcKxcyllFas5z2A==}
     engines: {node: '>=0.4.0'}
     dev: true
+
+  /xtend@4.0.2:
+    resolution: {integrity: sha512-LKYU1iAXJXUgAXn9URjiu+MWhyUXHsvfp7mcuYm9dSUKK0/CjtrUwFAxD82/mCWbtLsGjFIad0wIsod4zrTAEQ==}
+    engines: {node: '>=0.4'}
+    dev: false
 
   /y18n@5.0.8:
     resolution: {integrity: sha512-0pfFzegeDWJHJIAmTLRP2DwHjdF5s7jo9tuztdQxAhINCdvS+3nGINqPd00AphqJR/0LhANUS6/+7SCb98YOfA==}

@@ -2,6 +2,7 @@ import { featureCollection } from '@turf/turf'
 
 // for draw
 export function addDrawSource() {
+  refreshPointColor()
   const map = window.map
   const data: any = localDrawFeatureCollection.value
   const source: any = map.getSource(MAP_DRAW_SOURCE_NAME)

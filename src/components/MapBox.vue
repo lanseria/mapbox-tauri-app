@@ -5,6 +5,7 @@ import mapboxgl from 'mapbox-gl'
 import MapboxLanguage from '@mapbox/mapbox-gl-language'
 import 'mapbox-gl/dist/mapbox-gl.css'
 import { nanoid } from 'nanoid'
+import MapboxDraw from '@mapbox/mapbox-gl-draw'
 
 mapboxgl.accessToken = import.meta.env.VITE_MAPBOX_TOKEN
 let map: mapboxgl.Map | null = null
@@ -19,26 +20,26 @@ onMounted(() => {
     attributionControl: false,
   })
   window.map = map
+  // draw
+  const draw = new MapboxDraw({
+    displayControlsDefault: false,
+    userProperties: true,
+    modes: {
+      direct_select: MapboxDraw.modes.direct_select,
+      simple_select: MapboxDraw.modes.simple_select,
+      draw_line_string: ExtendedLineStringMode,
+    },
+    styles: mapDrawStyle,
+  })
+  window.draw = draw
+  // add map control
   map.addControl(new MapboxLanguage({ defaultLanguage: 'zh-Hans' }))
+  map.addControl(draw)
+  // map loading
   map.on('load', () => {
     map!.resize()
     handleMapLoad(map!)
   })
-  // map.on('mouseenter', () => {
-  //   console.log('mouseenter')
-  //   if (map) {
-  //     if (['point', 'line', 'polygon', 'circle'].includes(sessionMouseState.value)) {
-  //       console.warn('[getCanvas]', map.getCanvas())
-  //       map.getCanvas().style.cursor = 'pointer'
-  //     }
-  //   }
-  // })
-  // map.on('mouseleave', () => {
-  //   if (map) {
-  //     console.warn('[getCanvas]', map.getCanvas())
-  //     map.getCanvas().style.cursor = ''
-  //   }
-  // })
   map.on('click', (e) => {
     if (map === null)
       return
@@ -52,6 +53,20 @@ onMounted(() => {
       addDrawSource()
       sessionMouseState.value = 'default'
     }
+  })
+
+  map.on('draw.create', (e) => {
+    console.warn('[draw.create]', e.features[0])
+    const id = nanoid()
+    localDrawFeatureCollection.value.features.push(
+      turf.lineString(
+        e.features[0].geometry.coordinates,
+        initDrawLine(id, e.features[0].geometry.coordinates),
+      ),
+    )
+    draw.deleteAll()
+    sessionMouseState.value = 'default'
+    addDrawSource()
   })
 })
 </script>
