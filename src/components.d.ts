@@ -19,6 +19,7 @@ declare module 'vue' {
     MapBox: typeof import('./components/MapBox.vue')['default']
     Modal: typeof import('./components/Modal.vue')['default']
     PointFormModal: typeof import('./components/PointFormModal.vue')['default']
+    PolygonFormModal: typeof import('./components/PolygonFormModal.vue')['default']
     SourceBar: typeof import('./components/SourceBar.vue')['default']
     SourceDrawData: typeof import('./components/SourceDrawData.vue')['default']
     Titlebar: typeof import('./components/Titlebar.vue')['default']

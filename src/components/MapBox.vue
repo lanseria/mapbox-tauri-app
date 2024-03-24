@@ -28,6 +28,7 @@ onMounted(() => {
       direct_select: MapboxDraw.modes.direct_select,
       simple_select: MapboxDraw.modes.simple_select,
       draw_line_string: ExtendedLineStringMode,
+      draw_polygon: MapboxDraw.modes.draw_polygon,
     },
     styles: mapDrawStyle,
   })
@@ -44,6 +45,7 @@ onMounted(() => {
     if (map === null)
       return
     console.warn('[map.click]', e)
+    sessionDrawActiveId.value = ''
     if (sessionMouseState.value === 'point') {
       console.warn('[map.click.point]', [e.lngLat.lng, e.lngLat.lat])
       const id = nanoid()
@@ -56,14 +58,13 @@ onMounted(() => {
   })
 
   map.on('draw.create', (e) => {
-    console.warn('[draw.create]', e.features[0])
+    console.warn('[draw.create]')
     const id = nanoid()
-    localDrawFeatureCollection.value.features.push(
-      turf.lineString(
-        e.features[0].geometry.coordinates,
-        initDrawLine(id, e.features[0].geometry.coordinates),
-      ),
-    )
+    if (e.features[0].geometry.type === 'LineString')
+      e.features[0].properties = initDrawLine(id, e.features[0].geometry.coordinates)
+    if (e.features[0].geometry.type === 'Polygon')
+      e.features[0].properties = initDrawPolygon(id, e.features[0].geometry.coordinates)
+    localDrawFeatureCollection.value.features.push(e.features[0])
     draw.deleteAll()
     sessionMouseState.value = 'default'
     addDrawSource()

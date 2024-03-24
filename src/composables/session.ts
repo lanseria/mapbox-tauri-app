@@ -1,6 +1,5 @@
-import type { DrawLine, DrawPoint } from '~/types'
+import type { DrawLine, DrawPoint, DrawPolygon, MouseState } from '~/types'
 
-export type MouseState = 'default' | 'point' | 'line' | 'polygon' | 'circle'
 /**
  * MouseState
  */
@@ -12,7 +11,11 @@ watchEffect(() => {
 
   if (sessionMouseState.value === 'line')
     window.draw && window.draw.changeMode('draw_line_string')
+  if (sessionMouseState.value === 'polygon')
+    window.draw && window.draw.changeMode('draw_polygon')
 })
+
+export const sessionDrawActiveId = useSessionStorage('sessionDrawActiveId', '')
 
 export function initDrawPoint(id: string, coords: number[]): DrawPoint {
   return {
@@ -39,5 +42,17 @@ export function initDrawLine(id: string, coords: number[]): DrawLine {
     color: INIT_LINE_COLOR,
     width: INIT_LINE_WIDTH,
     opacity: INIT_LINE_OPACITY,
+  }
+}
+
+export function initDrawPolygon(id: string, coords: number[]): DrawPolygon {
+  return {
+    id,
+    name: id,
+    coords,
+    fillColor: INIT_POLYGON_FILL_COLOR,
+    fillOpacity: INIT_POLYGON_FILL_OPACITY,
+    lineColor: INIT_POLYGON_LINE_COLOR,
+    lineWidth: INIT_POLYGON_LINE_WIDTH,
   }
 }

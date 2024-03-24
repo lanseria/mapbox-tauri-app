@@ -36,6 +36,10 @@ function addColorSymbol(color: string) {
   const map = window.map
   const rgb = hexToRgb(color)
   if (rgb) {
+    if (map.hasImage(color)) {
+      console.warn('[addColorSymbol]', '[hasImage]', color)
+      return
+    }
     const r = rgb?.r
     const g = rgb?.g
     const b = rgb?.b
@@ -53,7 +57,8 @@ export function loadDraw() {
 
 export function refreshPointColor() {
   // 获取所有的点的颜色
-  const localColors = localDrawFeatureCollection.value.features.map((f: any) => f.properties.color)
+  const localColors = localDrawFeatureCollection.value.features
+    .filter((f: any) => f.geometry.type === 'Point').map((f: any) => f.properties.color)
   const allColors = new Set([INIT_POINT_COLOR, ...localColors])
   // 重新添加颜色点
   for (const color of allColors)

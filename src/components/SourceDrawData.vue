@@ -1,8 +1,10 @@
 <script lang="ts" setup>
 import * as turf from '@turf/turf'
+import { sessionDrawActiveId } from '~/composables/session'
 
 const PointFormModalRef = shallowRef()
 const LineFormModalRef = shallowRef()
+const PolygonFormModalRef = shallowRef()
 const computedDrawData = computed(() => {
   return localDrawFeatureCollection.value.features
 })
@@ -14,8 +16,10 @@ function editFeature(item: any) {
   console.warn('[editFeature]')
   if (item.geometry.type === 'Point')
     PointFormModalRef.value.open(item.properties)
-  else if (item.geometry.type === 'LineString')
+  if (item.geometry.type === 'LineString')
     LineFormModalRef.value.open(item.properties)
+  if (item.geometry.type === 'Polygon')
+    PolygonFormModalRef.value.open(item.properties)
 }
 function flyToItem(item: any) {
   console.warn('[flyToItem]', item)
@@ -32,6 +36,13 @@ function flyToItem(item: any) {
       lat: center[1],
     })
   }
+  if (item.geometry.type === 'Polygon') {
+    const center = turf.center(item).geometry.coordinates
+    window.map.panTo({
+      lng: center[0],
+      lat: center[1],
+    })
+  }
 }
 </script>
 
@@ -41,6 +52,9 @@ function flyToItem(item: any) {
       v-for="item in computedDrawData"
       :key="item.properties!.id"
       class="group relative box-border h-40px flex cursor-default items-center gap-1 border-1px border-transparent px-2 hover:border-blue-5"
+      :class="{
+        active: item.properties!.id === sessionDrawActiveId,
+      }"
       @click="flyToItem(item)"
     >
       <div class="flex-none">
@@ -64,5 +78,12 @@ function flyToItem(item: any) {
     </div>
     <PointFormModal ref="PointFormModalRef" />
     <LineFormModal ref="LineFormModalRef" />
+    <PolygonFormModal ref="PolygonFormModalRef" />
   </div>
 </template>
+
+<style lang="css" scoped>
+.group.active {
+  @apply border-blue-4;
+}
+</style>

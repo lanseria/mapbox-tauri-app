@@ -1,7 +1,7 @@
 <script lang="ts" setup>
 import type { PropType } from 'vue'
-import type { MouseState } from '~/composables'
 import { sessionMouseState } from '~/composables/session'
+import type { MouseState } from '~/types'
 
 defineProps({
   iconName: {
