@@ -1,5 +1,9 @@
 # Mapbox Tauri App
 
+`Mapbox Tauri App` 是一个 Mapbox Tauri Demo，可以展现 Map，画点线面并编辑管理
+
+"Mapbox Tauri App" is a Mapbox Tauri demo that can display maps, draw points, lines, and polygons, and provide editing and management capabilities.
+
 <img width="128" alt="app-icon" src="./app-icon.png">
 
 > [!warning]
