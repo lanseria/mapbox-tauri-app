@@ -6,6 +6,7 @@ import MapboxLanguage from '@mapbox/mapbox-gl-language'
 import 'mapbox-gl/dist/mapbox-gl.css'
 import { nanoid } from 'nanoid'
 import MapboxDraw from '@mapbox/mapbox-gl-draw'
+import { RadiusMode } from '~/composables/map-draw-radius'
 
 mapboxgl.accessToken = import.meta.env.VITE_MAPBOX_TOKEN
 let map: mapboxgl.Map | null = null
@@ -29,6 +30,7 @@ onMounted(() => {
       simple_select: MapboxDraw.modes.simple_select,
       draw_line_string: ExtendedLineStringMode,
       draw_polygon: MapboxDraw.modes.draw_polygon,
+      draw_radius: RadiusMode,
     },
     styles: mapDrawStyle,
   })

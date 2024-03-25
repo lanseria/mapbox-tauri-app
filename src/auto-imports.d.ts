@@ -25,6 +25,7 @@ declare global {
   const MAP_DRAW_POLYGON_LAYER_NAME: typeof import('./composables/constant')['MAP_DRAW_POLYGON_LAYER_NAME']
   const MAP_DRAW_POLYGON_LINE_LAYER_NAME: typeof import('./composables/constant')['MAP_DRAW_POLYGON_LINE_LAYER_NAME']
   const MAP_DRAW_SOURCE_NAME: typeof import('./composables/constant')['MAP_DRAW_SOURCE_NAME']
+  const RadiusMode: typeof import('./composables/map-draw-radius')['RadiusMode']
   const addDrawLayer: typeof import('./composables/map-layer')['addDrawLayer']
   const addDrawLineLayer: typeof import('./composables/map-layer')['addDrawLineLayer']
   const addDrawPointLayer: typeof import('./composables/map-layer')['addDrawPointLayer']

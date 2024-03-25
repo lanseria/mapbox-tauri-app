@@ -13,6 +13,8 @@ watchEffect(() => {
     window.draw && window.draw.changeMode('draw_line_string')
   if (sessionMouseState.value === 'polygon')
     window.draw && window.draw.changeMode('draw_polygon')
+  if (sessionMouseState.value === 'circle')
+    window.draw && window.draw.changeMode('draw_radius')
 })
 
 export const sessionDrawActiveId = useSessionStorage('sessionDrawActiveId', '')
