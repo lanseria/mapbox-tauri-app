@@ -8,7 +8,6 @@ watchEffect(() => {
   console.warn('[watchEffect]', '[sessionMouseState]')
   if (sessionMouseState.value === 'default')
     window.draw && window.draw.changeMode('simple_select')
-
   if (sessionMouseState.value === 'line')
     window.draw && window.draw.changeMode('draw_line_string')
   if (sessionMouseState.value === 'polygon')
