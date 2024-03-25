@@ -23,6 +23,7 @@ declare module 'vue' {
     SourceBar: typeof import('./components/SourceBar.vue')['default']
     SourceDrawData: typeof import('./components/SourceDrawData.vue')['default']
     SourceTiffData: typeof import('./components/SourceTiffData.vue')['default']
+    TiffBtn: typeof import('./components/TiffBtn.vue')['default']
     Titlebar: typeof import('./components/Titlebar.vue')['default']
     ToolBar: typeof import('./components/ToolBar.vue')['default']
     ToolBtn: typeof import('./components/ToolBtn.vue')['default']
