@@ -1,3 +1,4 @@
+import type { GeoTIFFImage } from 'geotiff'
 import { fromBlob } from 'geotiff'
 import type GeoTIFF from 'geotiff'
 import proj4 from 'proj4'
@@ -25,8 +26,7 @@ export async function workWithGeoTIFF(blob: any) {
     [lng1, lat2],
   ]
 }
-export async function tiff2Png(tiff: GeoTIFF) {
-  const image = await tiff.getImage()
+export async function tiff2Png(image: GeoTIFFImage) {
   const width = image.getWidth()
   const height = image.getHeight()
 
@@ -55,4 +55,44 @@ export async function tiff2Png(tiff: GeoTIFF) {
   }
   context!.putImageData(data, 0, 0)
   return canvas.toDataURL()
+}
+
+export async function tiff2Base64(image: GeoTIFFImage) {
+  const data = await image.readRasters()
+  const thumbnailPixelHeight = data.height
+  const thumbnailPixelWidth = data.width
+  const canvas = document.createElement('canvas')
+  canvas.width = thumbnailPixelWidth
+  canvas.height = thumbnailPixelHeight
+  const ctx = canvas.getContext('2d')
+  let totalPixelCount = 0
+  for (let y = 0; y < thumbnailPixelHeight; y++) {
+    for (let x = 0; x < thumbnailPixelWidth; x++) {
+      let colour = 'rgb(0, 0, 0, 0)' // let the default be no data (transparent)
+      // 根据灰度值所在范围渲染颜色
+      // eslint-disable-next-line ts/ban-ts-comment
+      // @ts-expect-error
+      if (data[0][totalPixelCount] > 0) {
+        // eslint-disable-next-line ts/ban-ts-comment
+        // @ts-expect-error
+        if (data[0][totalPixelCount] > 50 && data[0][totalPixelCount] <= 55)
+          colour = `rgb(15, 255, 0, 1)`
+          // eslint-disable-next-line ts/ban-ts-comment
+          // @ts-expect-error
+        else if (data[0][totalPixelCount] > 55 && data[0][totalPixelCount] <= 60)
+          colour = `rgb(155, 255, 0, 1)`
+          // eslint-disable-next-line ts/ban-ts-comment
+          // @ts-expect-error
+        else if (data[0][totalPixelCount] > 60 && data[0][totalPixelCount] <= 65)
+          colour = `rgb(255, 255, 0, 1)`
+        else
+          colour = `rgb(255, 255, 0, 1)`
+      }
+      ctx!.fillStyle = colour
+      ctx!.fillRect(x, y, 1, 1)
+      totalPixelCount++
+    }
+  }
+  const canvasImage = canvas.toDataURL('image/png')
+  return canvasImage
 }

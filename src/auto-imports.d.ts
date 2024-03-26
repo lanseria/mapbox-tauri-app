@@ -133,6 +133,7 @@ declare global {
   const templateRef: typeof import('@vueuse/core')['templateRef']
   const throttledRef: typeof import('@vueuse/core')['throttledRef']
   const throttledWatch: typeof import('@vueuse/core')['throttledWatch']
+  const tiff2Base64: typeof import('./composables/tiff-utils')['tiff2Base64']
   const tiff2Png: typeof import('./composables/tiff-utils')['tiff2Png']
   const toRaw: typeof import('vue')['toRaw']
   const toReactive: typeof import('@vueuse/core')['toReactive']

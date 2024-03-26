@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-const emits = defineEmits(['update:base64'])
+const emits = defineEmits(['update:base64', 'update:width', 'update:height'])
 const { open, reset, onChange } = useFileDialog({
   accept: '.tif', // Set to accept only image files
 })
@@ -8,9 +8,14 @@ onChange(async (files) => {
   if (files) {
     const file = files[0]
     const tiff = await fromBlob(file)
-    const base64 = await tiff2Png(tiff)
+    const image = await tiff.getImage()
+    const width = image.getWidth()
+    const height = image.getHeight()
+    const base64 = await tiff2Png(image)
     console.warn('base64', base64)
     emits('update:base64', base64)
+    emits('update:width', width)
+    emits('update:height', height)
     reset()
   }
 })

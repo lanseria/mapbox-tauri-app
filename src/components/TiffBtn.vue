@@ -7,8 +7,9 @@ onChange(async (files) => {
   if (files) {
     const file = files[0]
     const tiff = await fromBlob(file)
+    const image = await tiff.getImage()
     const bbox_wgs = await workWithGeoTIFF(file)
-    const png = await tiff2Png(tiff)
+    const png = await tiff2Png(image)
 
     console.warn('bbox_wgs', bbox_wgs)
     const map = window.map
