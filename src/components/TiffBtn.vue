@@ -32,7 +32,7 @@ onChange(async (files) => {
 </script>
 
 <template>
-  <div class="p-2">
+  <div class="px-2 py-1">
     <div class="block text-center btn" @click="open()">
       导入Tiff文件
     </div>
