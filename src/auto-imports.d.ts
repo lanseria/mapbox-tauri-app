@@ -125,6 +125,8 @@ declare global {
   const sessionDrawMarkerList: typeof import('./composables/session')['sessionDrawMarkerList']
   const sessionDrawPointList: typeof import('./composables/session')['sessionDrawPointList']
   const sessionMouseState: typeof import('./composables/session')['sessionMouseState']
+  const sessionSourceBarVisible: typeof import('./composables/session')['sessionSourceBarVisible']
+  const setSourceBarVisible: typeof import('./composables/session')['setSourceBarVisible']
   const shallowReactive: typeof import('vue')['shallowReactive']
   const shallowReadonly: typeof import('vue')['shallowReadonly']
   const shallowRef: typeof import('vue')['shallowRef']

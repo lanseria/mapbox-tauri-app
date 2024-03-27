@@ -1,5 +1,12 @@
 import type { DrawLine, DrawPoint, DrawPolygon, MouseState } from '~/types'
 
+export const sessionSourceBarVisible = useSessionStorage('sessionSourceBarVisible', true)
+export function setSourceBarVisible() {
+  sessionSourceBarVisible.value = !sessionSourceBarVisible.value
+  nextTick(() => {
+    window.map.resize()
+  })
+}
 /**
  * MouseState
  */

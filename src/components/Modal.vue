@@ -49,7 +49,7 @@ defineProps({
 }
 
 .modal-container {
-  width: 300px;
+  width: 400px;
   margin: auto;
   padding: 20px 30px;
   background-color: #fff;
@@ -66,9 +66,11 @@ defineProps({
 .modal-body {
   margin: 20px 0;
 }
-
+.modal-footer {
+  @apply text-right;
+}
 .modal-default-button {
-  float: right;
+  @apply hover:text-blue-5;
 }
 
 /*
