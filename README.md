@@ -14,6 +14,10 @@
 >
 > Since a solution similar to `electron.js` for modifying request headers hasn't been found temporarily, the URLs in the `mapbox` `access tokens` need to be set to unrestricted, meaning that any address can be accessed, or you can directly use the `Default public token`. If you have any good solutions, please git pull. Thank you. 🙏
 
+## App Screenshot
+
+<img width="512" alt="app-screenshot" src="./app-screenshot.jpg">
+
 ## Small tip to upgrade
 
 update major package version
