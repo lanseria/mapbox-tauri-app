@@ -1,28 +1,30 @@
 <script lang="ts" setup>
-const emits = defineEmits(['update:bounds'])
-const { open, reset, onChange } = useFileDialog({
-  accept: '.tfw', // Set to accept only image files
-})
+import { Message } from '@arco-design/web-vue'
+import { open } from '@tauri-apps/api/dialog'
+import { readTextFile } from '@tauri-apps/api/fs'
 
-onChange(async (files) => {
-  /** do something with files */
-  if (files) {
-    const file = files[0]
-    const reader = new FileReader()
-    reader.onload = function (e) {
-      console.warn(e!.target!.result!)
-      const result = e!.target!.result as string
-      const lines = result.split('\n').map(line => Number.parseFloat(line))
-      emits('update:bounds', lines)
-    }
-    reader.readAsText(file)
-    reset()
+const emits = defineEmits(['update:bounds'])
+async function openFile() {
+  const selected = await open({
+    multiple: false,
+    filters: [{
+      name: 'TIFF World File',
+      extensions: ['tfw'],
+    }],
+  })
+  if (selected === null) {
+    Message.warning('未选择文件')
   }
-})
+  else {
+    const contents = await readTextFile(selected as string)
+    const lines = contents.split('\n').map(line => Number.parseFloat(line))
+    emits('update:bounds', lines)
+  }
+}
 </script>
 
 <template>
-  <div class="flex-1 text-center btn" @click="open()">
-    导入Tfw
-  </div>
+  <button class="ms-blue-btn flex-1 text-center" @click="openFile()">
+    <slot />
+  </button>
 </template>

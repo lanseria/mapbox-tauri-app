@@ -1,10 +1,28 @@
 import type { GeoTIFFImage } from 'geotiff'
 import { fromBlob } from 'geotiff'
-import type GeoTIFF from 'geotiff'
 import proj4 from 'proj4'
 import geokeysToProj4 from 'geotiff-geokeys-to-proj4'
 
-export { fromBlob } from 'geotiff'
+export { fromBlob, fromArrayBuffer } from 'geotiff'
+
+export async function getBoundingBoxFormUint8Array(arrayBuffer: ArrayBuffer) {
+  const tiff = await fromArrayBuffer(arrayBuffer)
+  const image = await tiff.getImage(0) // Get image instance
+  const geoKeys = image.getGeoKeys() // Get geokeys
+  const projObj = geokeysToProj4.toProj4(geoKeys) // Convert geokeys to proj4 string
+  const [x1, y1, x2, y2] = image.getBoundingBox()
+  // const [xSize, ySize] = image.getResolution()
+
+  const [lng1, lat1] = proj4(projObj.proj4, 'WGS84').forward([x1, y1]) // Project these coordinates
+  const [lng2, lat2] = proj4(projObj.proj4, 'WGS84').forward([x2, y2]) // Project these coordinates
+  // Work with projected coordinates...
+  return [
+    [lng1, lat1],
+    [lng2, lat1],
+    [lng2, lat2],
+    [lng1, lat2],
+  ]
+}
 // Let's wrap our example in a function
 export async function workWithGeoTIFF(blob: any) {
   // Read image. See geotiff.js docs on what all of that means.

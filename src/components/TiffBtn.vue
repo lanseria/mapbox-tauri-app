@@ -1,14 +1,29 @@
 <script lang="ts" setup>
-const { open, reset, onChange } = useFileDialog({
-  accept: 'image/tiff', // Set to accept only image files
-})
-onChange(async (files) => {
-  /** do something with files */
-  if (files) {
-    const file = files[0]
-    const tiff = await fromBlob(file)
+import { Message } from '@arco-design/web-vue'
+import { open } from '@tauri-apps/api/dialog'
+import { readBinaryFile } from '@tauri-apps/api/fs'
+
+async function openFile() {
+  const selected = await open({
+    multiple: false,
+    filters: [{
+      name: 'Tagged Image Format',
+      extensions: ['tif'],
+    }],
+  })
+  if (selected === null) {
+    Message.warning('未选择文件')
+  }
+  else {
+    const contents = await readBinaryFile(selected as string)
+    // 将 Uint8Array 转换为 ArrayBuffer
+    const arrayBuffer = contents.buffer.slice(
+      contents.byteOffset,
+      contents.byteOffset + contents.byteLength,
+    )
+    const tiff = await fromArrayBuffer(arrayBuffer)
     const image = await tiff.getImage()
-    const bbox_wgs = await workWithGeoTIFF(file)
+    const bbox_wgs = await getBoundingBoxFormUint8Array(arrayBuffer)
     const png = await tiff2Png(image)
 
     console.warn('bbox_wgs', bbox_wgs)
@@ -27,15 +42,14 @@ onChange(async (files) => {
         'raster-fade-duration': 0,
       },
     })
-    reset()
   }
-})
+}
 </script>
 
 <template>
   <div class="px-2 py-1">
-    <div class="block text-center btn" @click="open()">
+    <button class="ms-blue-btn w-full text-center" @click="openFile()">
       导入Tiff文件
-    </div>
+    </button>
   </div>
 </template>

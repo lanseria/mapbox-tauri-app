@@ -1,13 +1,29 @@
 <script lang="ts" setup>
+import { Message } from '@arco-design/web-vue'
+import { open } from '@tauri-apps/api/dialog'
+import { readBinaryFile } from '@tauri-apps/api/fs'
+
 const emits = defineEmits(['update:base64', 'update:width', 'update:height'])
-const { open, reset, onChange } = useFileDialog({
-  accept: '.tif', // Set to accept only image files
-})
-onChange(async (files) => {
-  /** do something with files */
-  if (files) {
-    const file = files[0]
-    const tiff = await fromBlob(file)
+
+async function openFile() {
+  const selected = await open({
+    multiple: false,
+    filters: [{
+      name: 'Tagged Image Format',
+      extensions: ['tif'],
+    }],
+  })
+  if (selected === null) {
+    Message.warning('未选择文件')
+  }
+  else {
+    const contents = await readBinaryFile(selected as string)
+    // 将 Uint8Array 转换为 ArrayBuffer
+    const arrayBuffer = contents.buffer.slice(
+      contents.byteOffset,
+      contents.byteOffset + contents.byteLength,
+    )
+    const tiff = await fromArrayBuffer(arrayBuffer)
     const image = await tiff.getImage()
     const width = image.getWidth()
     const height = image.getHeight()
@@ -16,13 +32,12 @@ onChange(async (files) => {
     emits('update:base64', base64)
     emits('update:width', width)
     emits('update:height', height)
-    reset()
   }
-})
+}
 </script>
 
 <template>
-  <div class="flex-1 text-center btn" @click="open()">
-    导入Tif
-  </div>
+  <button class="ms-blue-btn flex-1 text-center" @click="openFile()">
+    <slot />
+  </button>
 </template>

@@ -7,6 +7,13 @@ let bbox: number[][] = []
 let width = 0
 let height = 0
 let coordinates: number[][] = []
+// ref
+const isLoadTif = ref(false)
+const isLoadTfw = ref(false)
+function initLoad() {
+  isLoadTif.value = false
+  isLoadTfw.value = false
+}
 function updateWidth(data: number) {
   width = data
 }
@@ -14,9 +21,11 @@ function updateHeight(data: number) {
   height = data
 }
 function updateBase64(data: string) {
+  isLoadTif.value = true
   base64 = data
 }
 function updateBound(data: number[]) {
+  isLoadTfw.value = true
   bounds = data
 }
 function calculateBounds() {
@@ -62,6 +71,7 @@ function handleMerge() {
       'raster-opacity': 0.5,
     },
   })
+  initLoad()
 }
 </script>
 
@@ -73,13 +83,23 @@ function handleMerge() {
         @update:base64="updateBase64"
         @update:width="updateWidth"
         @update:height="updateHeight"
-      />
-      <TfwBtn @update:bounds="updateBound" />
+      >
+        导入Tif<IconCheck v-if="isLoadTif" />
+      </TifBtn>
+      <TfwBtn
+        @update:bounds="updateBound"
+      >
+        导入Tfw<IconCheck v-if="isLoadTfw" />
+      </TfwBtn>
     </div>
-    <div class="w-full flex gap-2 px-2 py-1" @click="handleMerge">
-      <div class="flex-1 text-center btn">
+    <div class="w-full flex gap-2 px-2 py-1">
+      <button
+        class="ms-blue-btn flex-1 text-center"
+        :disabled="!isLoadTif || !isLoadTfw"
+        @click="handleMerge"
+      >
         合并文件
-      </div>
+      </button>
     </div>
   </div>
 </template>

@@ -19,6 +19,7 @@ declare module 'vue' {
     ATypographyText: typeof import('@arco-design/web-vue')['TypographyText']
     IconBgColors: typeof import('@arco-design/web-vue/es/icon')['IconBgColors']
     IconBtn: typeof import('./components/IconBtn.vue')['default']
+    IconCheck: typeof import('@arco-design/web-vue/es/icon')['IconCheck']
     LineFormModal: typeof import('./components/LineFormModal.vue')['default']
     MapBox: typeof import('./components/MapBox.vue')['default']
     MapLogo: typeof import('./components/MapLogo.vue')['default']
