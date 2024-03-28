@@ -11,8 +11,8 @@ export function setSourceBarVisible() {
  * MouseState
  */
 export const sessionMouseState = useSessionStorage<MouseState>('sessionMouseState', 'default')
-watchEffect(() => {
-  console.warn('[watchEffect]', '[sessionMouseState]')
+watch(sessionMouseState, () => {
+  console.warn('[watchEffect]', '[sessionMouseState]', sessionMouseState.value)
   if (sessionMouseState.value === 'default')
     window.draw && window.draw.changeMode('simple_select')
   if (sessionMouseState.value === 'line')

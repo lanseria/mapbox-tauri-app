@@ -14,6 +14,7 @@ export function addDrawPointLayer() {
       'text-offset': [0, 0.5],
       'text-anchor': 'top',
       'icon-allow-overlap': true,
+      'visibility': 'visible',
     },
     paint: {
       'text-color': ['get', 'textFillColor'],
@@ -45,10 +46,10 @@ export function addDrawLineLayer() {
     id: MAP_DRAW_LINE_LAYER_NAME,
     type: 'line',
     source: MAP_DRAW_SOURCE_NAME,
-
     layout: {
       'line-cap': ['coalesce', ['get', 'line-cap'], 'round'],
       'line-join': ['coalesce', ['get', 'line-cap'], 'round'],
+      'visibility': 'visible',
     },
     paint: {
       'line-color': ['coalesce', ['get', 'color'], '#000'],
@@ -80,6 +81,9 @@ export function addDrawPolygonLayer() {
     id: MAP_DRAW_POLYGON_LAYER_NAME,
     type: 'fill',
     source: MAP_DRAW_SOURCE_NAME,
+    layout: {
+      visibility: 'visible',
+    },
     paint: {
       'fill-color': ['coalesce', ['get', 'fillColor'], '#000'],
       'fill-opacity': ['coalesce', ['get', 'fillOpacity'], 1],

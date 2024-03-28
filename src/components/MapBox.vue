@@ -1,12 +1,9 @@
 <script lang="ts" setup>
-import * as turf from '@turf/turf'
 import type { LngLatLike } from 'mapbox-gl'
 import mapboxgl from 'mapbox-gl'
 import MapboxLanguage from '@mapbox/mapbox-gl-language'
 import 'mapbox-gl/dist/mapbox-gl.css'
-import { nanoid } from 'nanoid'
 import MapboxDraw from '@mapbox/mapbox-gl-draw'
-import { RadiusMode } from '~/composables/map-draw-radius'
 
 mapboxgl.accessToken = import.meta.env.VITE_MAPBOX_TOKEN
 let map: mapboxgl.Map | null = null
@@ -48,28 +45,13 @@ onMounted(() => {
       return
     console.warn('[map.click]', e)
     sessionDrawActiveId.value = ''
-    if (sessionMouseState.value === 'point') {
-      console.warn('[map.click.point]', [e.lngLat.lng, e.lngLat.lat])
-      const id = nanoid()
-      localDrawFeatureCollection.value.features.push(
-        turf.point([e.lngLat.lng, e.lngLat.lat], initDrawPoint(id, [e.lngLat.lng, e.lngLat.lat])),
-      )
-      addDrawSource()
-      sessionMouseState.value = 'default'
-    }
+    if (sessionMouseState.value === 'point')
+      addMapFeature(e, '1')
   })
 
   map.on('draw.create', (e) => {
     console.warn('[draw.create]')
-    const id = nanoid()
-    if (e.features[0].geometry.type === 'LineString')
-      e.features[0].properties = initDrawLine(id, e.features[0].geometry.coordinates)
-    if (e.features[0].geometry.type === 'Polygon')
-      e.features[0].properties = initDrawPolygon(id, e.features[0].geometry.coordinates)
-    localDrawFeatureCollection.value.features.push(e.features[0])
-    draw.deleteAll()
-    sessionMouseState.value = 'default'
-    addDrawSource()
+    addMapFeature(e, '2')
   })
 })
 </script>

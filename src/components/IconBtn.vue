@@ -4,12 +4,17 @@ defineProps({
     type: String,
     required: true,
   },
+  tooltipName: {
+    type: String,
+    required: true,
+  },
 })
 </script>
 
 <template>
   <div
     class="tool-button"
+    :title="tooltipName"
   >
     <div class="tool-icon" :class="iconName" />
   </div>

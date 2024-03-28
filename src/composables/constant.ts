@@ -18,3 +18,4 @@ export const INIT_POLYGON_FILL_COLOR = '#e88b4d'
 export const INIT_POLYGON_LINE_COLOR = '#e0be28'
 export const INIT_POLYGON_FILL_OPACITY = 0.5
 export const INIT_POLYGON_LINE_WIDTH = 1
+//

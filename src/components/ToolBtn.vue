@@ -3,7 +3,7 @@ import type { PropType } from 'vue'
 import { sessionMouseState } from '~/composables/session'
 import type { MouseState } from '~/types'
 
-defineProps({
+const props = defineProps({
   iconName: {
     type: String,
     required: true,
@@ -12,13 +12,21 @@ defineProps({
     type: String as PropType<MouseState>,
     required: true,
   },
+  name: {
+    type: String,
+    required: true,
+  },
 })
+function handleClick() {
+  sessionMouseState.value = props.type
+}
 </script>
 
 <template>
   <IconBtn
     :icon-name="iconName" :class="`${sessionMouseState === type ? 'active' : 'inactive'}`"
-    @click="sessionMouseState = type"
+    :tooltip-name="name"
+    @click="handleClick"
   />
 </template>
 
