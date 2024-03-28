@@ -49,7 +49,7 @@ function addColorSymbol(color: string) {
     throw new Error(`${color} is not a valid hex color`)
   }
 }
-
+// for draw
 export function loadDraw() {
   addDrawSource()
   addDrawLayer()
@@ -65,7 +65,16 @@ export function refreshPointColor() {
     addColorSymbol(color)
 }
 
+// for tiff
+export function loadTiff() {
+  localTiffDataList.value.forEach((item) => {
+    addTiffSource(item)
+    addTiffLayer(item)
+  })
+}
+
 export function handleMapLoad(map: mapboxgl.Map) {
   console.warn('[handleMapLoad]', map)
   loadDraw()
+  loadTiff()
 }

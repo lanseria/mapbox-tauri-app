@@ -1,4 +1,5 @@
 import { featureCollection } from '@turf/turf'
+import type { TiffData } from '~/types'
 
 // for draw
 export function addDrawSource() {
@@ -24,4 +25,26 @@ export function clearDrawSource() {
   // 判断 source
   if (source)
     source.setData(featureCollection([]))
+}
+
+// for tif
+export function addTiffSource(item: TiffData) {
+  const map = window.map
+  const sourceName = `tiff-source-${item.id}`
+  const source: any = map.getSource(sourceName)
+  if (!source) {
+    map.addSource(sourceName, {
+      type: 'image',
+      url: item.base64,
+      coordinates: item.coordinates,
+    })
+  }
+}
+export function clearTiffSource() {
+  const map = window.map
+  localTiffDataList.value.forEach((item) => {
+    const sourceName = `tiff-source-${item.id}`
+    if (map.getSource(sourceName))
+      map.removeSource(sourceName)
+  })
 }

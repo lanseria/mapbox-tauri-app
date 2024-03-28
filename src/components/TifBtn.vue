@@ -3,7 +3,7 @@ import { Message } from '@arco-design/web-vue'
 import { open } from '@tauri-apps/api/dialog'
 import { readBinaryFile } from '@tauri-apps/api/fs'
 
-const emits = defineEmits(['update:base64', 'update:width', 'update:height'])
+const emits = defineEmits(['update:base64', 'update:width', 'update:height', 'update:fileName'])
 
 async function openFile() {
   const selected = await open({
@@ -18,6 +18,7 @@ async function openFile() {
   }
   else {
     const contents = await readBinaryFile(selected as string)
+    const fileName = getFileNameFromPath(selected as string)
     // 将 Uint8Array 转换为 ArrayBuffer
     const arrayBuffer = contents.buffer.slice(
       contents.byteOffset,
@@ -28,10 +29,11 @@ async function openFile() {
     const width = image.getWidth()
     const height = image.getHeight()
     const base64 = await tiff2Png(image)
-    console.warn('base64', base64)
+    // console.warn('base64', base64)
     emits('update:base64', base64)
     emits('update:width', width)
     emits('update:height', height)
+    emits('update:fileName', fileName)
   }
 }
 </script>

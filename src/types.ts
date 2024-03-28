@@ -35,3 +35,12 @@ export interface DrawPolygon {
   lineWidth: number
   visibility: boolean
 }
+
+export interface TiffData {
+  id: string
+  name: string
+  base64: string
+  coordinates: number[][]
+  opacity: number
+  visibility: boolean
+}

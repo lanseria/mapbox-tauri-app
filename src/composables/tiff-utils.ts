@@ -114,3 +114,10 @@ export async function tiff2Base64(image: GeoTIFFImage) {
   const canvasImage = canvas.toDataURL('image/png')
   return canvasImage
 }
+export function getFileNameFromPath(filePath: string) {
+  const separator = filePath.includes('/') ? '/' : '\\' // 检测路径中的分隔符
+  const parts = filePath.split(separator) // 根据分隔符拆分路径
+  const fileNameWithExtension = parts[parts.length - 1] // 获取最后一个部分（文件名+扩展名）
+  const fileName = fileNameWithExtension.split('.')[0] // 移除扩展名部分，只保留文件名
+  return fileName
+}

@@ -1,7 +1,11 @@
 <script lang="ts" setup>
+import { merge } from 'lodash-es'
 import type { LngLatBoundsLike } from 'mapbox-gl'
+import { nanoid } from 'nanoid'
+import { localTiffDataList } from '~/composables'
 
 let base64 = ''
+let fileName = ''
 let bounds: number[] = []
 let bbox: number[][] = []
 let width = 0
@@ -13,6 +17,9 @@ const isLoadTfw = ref(false)
 function initLoad() {
   isLoadTif.value = false
   isLoadTfw.value = false
+}
+function updateFilename(data: string) {
+  fileName = data
 }
 function updateWidth(data: number) {
   width = data
@@ -53,24 +60,19 @@ function handleMerge() {
   ]
   console.warn('bounds', bounds)
   console.warn('bbox', bbox)
-  const map = window.map
-  map.addSource('tiff-source', {
-    type: 'image',
-    url: base64,
+  const tiffData = merge(initTiffData(), {
+    id: nanoid(),
+    name: fileName,
+    base64,
     coordinates,
   })
+  localTiffDataList.value.push(tiffData)
+  const map = window.map
+  loadTiff()
   map.fitBounds(
     [bbox[0], bbox[1]] as LngLatBoundsLike,
     { padding: 20 },
   )
-  map.addLayer({
-    id: 'tif-layer',
-    type: 'raster',
-    source: 'tiff-source',
-    paint: {
-      'raster-opacity': 0.5,
-    },
-  })
   initLoad()
 }
 </script>
@@ -83,6 +85,7 @@ function handleMerge() {
         @update:base64="updateBase64"
         @update:width="updateWidth"
         @update:height="updateHeight"
+        @update:file-name="updateFilename"
       >
         导入Tif<IconCheck v-if="isLoadTif" />
       </TifBtn>
@@ -100,6 +103,10 @@ function handleMerge() {
       >
         合并文件
       </button>
+    </div>
+    <div class="h-1px bg-slate-2" />
+    <div>
+      <MapLayerItem v-for="item in localTiffDataList" :key="item.id" :item="item" layer-type="tiff" />
     </div>
   </div>
 </template>

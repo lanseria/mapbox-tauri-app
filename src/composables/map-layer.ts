@@ -1,3 +1,5 @@
+import type { TiffData } from '~/types'
+
 export function addDrawPointLayer() {
   const map = window.map
   if (map.getLayer(MAP_DRAW_POINT_LAYER_NAME))
@@ -106,9 +108,6 @@ export function addDrawPolygonLayer() {
     layout: {
       'line-join': 'round',
       'line-cap': 'round',
-      // eslint-disable-next-line ts/ban-ts-comment
-      // @ts-expect-error
-      'visibility': ['coalesce', ['get', 'visibility'], 'visible'],
     },
     paint: {
       'line-color': ['coalesce', ['get', 'lineColor'], '#000'],
@@ -139,4 +138,33 @@ export function addDrawLayer() {
   addDrawPointLayer()
   addDrawLineLayer()
   addDrawPolygonLayer()
+}
+
+// for tiff
+export function addTiffLayer(item: TiffData) {
+  const map = window.map
+  const sourceName = `tiff-source-${item.id}`
+  const layerName = `tif-layer-${item.id}`
+  if (map.getLayer(layerName))
+    map.removeLayer(layerName)
+  const layers = map.getStyle().layers
+  console.warn('layers', layers)
+  map.addLayer({
+    id: layerName,
+    type: 'raster',
+    source: sourceName,
+    layout: {
+      visibility: item.visibility ? 'visible' : 'none',
+    },
+    paint: {
+      'raster-opacity': item.opacity,
+    },
+  })
+}
+export function clearTiffLayer() {
+  localTiffDataList.value.forEach((item) => {
+    const layerName = `tif-layer-${item.id}`
+    if (window.map.getLayer(layerName))
+      window.map.removeLayer(layerName)
+  })
 }
