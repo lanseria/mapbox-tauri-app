@@ -147,8 +147,6 @@ export function addTiffLayer(item: TiffData) {
   const layerName = `tif-layer-${item.id}`
   if (map.getLayer(layerName))
     map.removeLayer(layerName)
-  const layers = map.getStyle().layers
-  console.warn('layers', layers)
   map.addLayer({
     id: layerName,
     type: 'raster',
@@ -159,7 +157,7 @@ export function addTiffLayer(item: TiffData) {
     paint: {
       'raster-opacity': item.opacity,
     },
-  })
+  }, 'map-draw-point-layer')
 }
 export function clearTiffLayer() {
   localTiffDataList.value.forEach((item) => {

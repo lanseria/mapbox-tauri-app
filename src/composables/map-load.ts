@@ -77,4 +77,8 @@ export function handleMapLoad(map: mapboxgl.Map) {
   console.warn('[handleMapLoad]', map)
   loadDraw()
   loadTiff()
+
+  // eslint-disable-next-line ts/ban-ts-comment
+  // @ts-expect-error
+  console.warn('_layers', Object.keys(map.style._layers))
 }

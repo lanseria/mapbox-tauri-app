@@ -15,7 +15,6 @@ declare module 'vue' {
     AInputNumber: typeof import('@arco-design/web-vue')['InputNumber']
     ASpace: typeof import('@arco-design/web-vue')['Space']
     ATag: typeof import('@arco-design/web-vue')['Tag']
-    ATooltip: typeof import('@arco-design/web-vue')['Tooltip']
     ATypographyText: typeof import('@arco-design/web-vue')['TypographyText']
     IconBgColors: typeof import('@arco-design/web-vue/es/icon')['IconBgColors']
     IconBtn: typeof import('./components/IconBtn.vue')['default']
