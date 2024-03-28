@@ -35,6 +35,7 @@ export function initDrawPoint(id: string, coords: number[]): DrawPoint {
     textFillColor: INIT_POINT_TEXT_FILL_COLOR,
     textStrokeColor: INIT_POINT_TEXT_HALO_COLOR,
     textSize: INIT_POINT_TEXT_SIZE,
+    visibility: true,
   }
 }
 /**
@@ -50,6 +51,7 @@ export function initDrawLine(id: string, coords: number[]): DrawLine {
     color: INIT_LINE_COLOR,
     width: INIT_LINE_WIDTH,
     opacity: INIT_LINE_OPACITY,
+    visibility: true,
   }
 }
 
@@ -62,5 +64,6 @@ export function initDrawPolygon(id: string, coords: number[]): DrawPolygon {
     fillOpacity: INIT_POLYGON_FILL_OPACITY,
     lineColor: INIT_POLYGON_LINE_COLOR,
     lineWidth: INIT_POLYGON_LINE_WIDTH,
+    visibility: true,
   }
 }

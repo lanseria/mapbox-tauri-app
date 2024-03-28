@@ -12,6 +12,7 @@ export interface DrawPoint {
   textStrokeColor: string
   textSize: number
   _marker?: Marker
+  visibility: boolean
 }
 
 export interface DrawLine {
@@ -21,6 +22,7 @@ export interface DrawLine {
   color: string
   width: number
   opacity: number
+  visibility: boolean
 }
 
 export interface DrawPolygon {
@@ -31,4 +33,5 @@ export interface DrawPolygon {
   fillOpacity: number
   lineColor: string
   lineWidth: number
+  visibility: boolean
 }

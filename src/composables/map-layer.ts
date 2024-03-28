@@ -14,7 +14,6 @@ export function addDrawPointLayer() {
       'text-offset': [0, 0.5],
       'text-anchor': 'top',
       'icon-allow-overlap': true,
-      'visibility': 'visible',
     },
     paint: {
       'text-color': ['get', 'textFillColor'],
@@ -22,7 +21,11 @@ export function addDrawPointLayer() {
       'text-halo-width': 1,
       'text-halo-blur': 0,
     },
-    filter: ['==', ['geometry-type'], 'Point'],
+    filter: [
+      'all',
+      ['==', ['geometry-type'], 'Point'],
+      ['==', ['get', 'visibility'], true],
+    ],
   })
   map.on('click', MAP_DRAW_POINT_LAYER_NAME, (e) => {
     if (e.features) {
@@ -49,14 +52,17 @@ export function addDrawLineLayer() {
     layout: {
       'line-cap': ['coalesce', ['get', 'line-cap'], 'round'],
       'line-join': ['coalesce', ['get', 'line-cap'], 'round'],
-      'visibility': 'visible',
     },
     paint: {
       'line-color': ['coalesce', ['get', 'color'], '#000'],
       'line-width': ['coalesce', ['get', 'width'], 2],
       'line-opacity': ['coalesce', ['get', 'opacity'], 1],
     },
-    filter: ['==', ['geometry-type'], 'LineString'],
+    filter: [
+      'all',
+      ['==', ['geometry-type'], 'LineString'],
+      ['==', ['get', 'visibility'], true],
+    ],
   })
   map.on('click', MAP_DRAW_LINE_LAYER_NAME, (e) => {
     if (e.features) {
@@ -81,14 +87,15 @@ export function addDrawPolygonLayer() {
     id: MAP_DRAW_POLYGON_LAYER_NAME,
     type: 'fill',
     source: MAP_DRAW_SOURCE_NAME,
-    layout: {
-      visibility: 'visible',
-    },
     paint: {
       'fill-color': ['coalesce', ['get', 'fillColor'], '#000'],
       'fill-opacity': ['coalesce', ['get', 'fillOpacity'], 1],
     },
-    filter: ['all', ['match', ['geometry-type'], ['Polygon'], !0, !1]],
+    filter: [
+      'all',
+      ['match', ['geometry-type'], ['Polygon'], !0, !1],
+      ['==', ['get', 'visibility'], true],
+    ],
   })
   if (map.getLayer(MAP_DRAW_POLYGON_LINE_LAYER_NAME))
     map.removeLayer(MAP_DRAW_POLYGON_LINE_LAYER_NAME)
@@ -99,13 +106,19 @@ export function addDrawPolygonLayer() {
     layout: {
       'line-join': 'round',
       'line-cap': 'round',
-      'visibility': 'visible',
+      // eslint-disable-next-line ts/ban-ts-comment
+      // @ts-expect-error
+      'visibility': ['coalesce', ['get', 'visibility'], 'visible'],
     },
     paint: {
       'line-color': ['coalesce', ['get', 'lineColor'], '#000'],
       'line-width': ['coalesce', ['get', 'lineWidth'], 1],
     },
-    filter: ['all', ['match', ['geometry-type'], ['Polygon'], !0, !1]],
+    filter: [
+      'all',
+      ['match', ['geometry-type'], ['Polygon'], !0, !1],
+      ['==', ['get', 'visibility'], true],
+    ],
   })
   const layerNameArr = [MAP_DRAW_POLYGON_LAYER_NAME, MAP_DRAW_POLYGON_LINE_LAYER_NAME]
   map.on('click', layerNameArr, (e) => {

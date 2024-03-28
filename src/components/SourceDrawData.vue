@@ -12,6 +12,10 @@ function removeFeature(item: any) {
   localDrawFeatureCollection.value.features = localDrawFeatureCollection.value.features.filter(feature => feature.properties!.id !== item.properties.id)
   addDrawSource()
 }
+function setVisible(item: any) {
+  item.properties!.visibility = !item.properties!.visibility
+  addDrawSource()
+}
 function editFeature(item: any) {
   console.warn('[editFeature]')
   if (item.geometry.type === 'Point')
@@ -68,6 +72,10 @@ function flyToItem(item: any) {
         </div>
       </div>
       <div class="hidden h-40px flex-none items-center justify-center group-hover:flex">
+        <div class="h-24px w-24px flex items-center justify-center rounded text-13px hover:bg-gray-1" @click.stop="setVisible(item)">
+          <div v-if="item.properties!.visibility" class="i-carbon-view" />
+          <div v-else class="i-carbon-view-off" />
+        </div>
         <div class="h-24px w-24px flex items-center justify-center rounded text-13px hover:bg-gray-1" @click.stop="editFeature(item)">
           <div class="i-carbon-edit" />
         </div>
