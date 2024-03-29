@@ -1,4 +1,4 @@
-import type { KmlData, TiffData } from '~/types'
+import type { TiffData } from '~/types'
 /**
  * 公共添加点
  * @param layerName
