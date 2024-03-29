@@ -82,6 +82,7 @@ function handleMerge() {
     <TiffBtn />
     <div class="w-full flex gap-2 px-2 py-1">
       <TifBtn
+        class="flex-1"
         @update:base64="updateBase64"
         @update:width="updateWidth"
         @update:height="updateHeight"
@@ -90,19 +91,21 @@ function handleMerge() {
         导入Tif<IconCheck v-if="isLoadTif" />
       </TifBtn>
       <TfwBtn
+        class="flex-1"
         @update:bounds="updateBound"
       >
         导入Tfw<IconCheck v-if="isLoadTfw" />
       </TfwBtn>
     </div>
     <div class="w-full flex gap-2 px-2 py-1">
-      <button
-        class="ms-blue-btn flex-1 text-center"
+      <AButton
+        type="primary"
+        long
         :disabled="!isLoadTif || !isLoadTfw"
         @click="handleMerge"
       >
-        合并文件
-      </button>
+        合并Tfw/Tif文件
+      </AButton>
     </div>
     <div class="h-1px bg-slate-2" />
     <div>

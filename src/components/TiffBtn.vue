@@ -48,8 +48,12 @@ async function openFile() {
 
 <template>
   <div class="px-2 py-1">
-    <button class="ms-blue-btn w-full text-center" @click="openFile()">
+    <AButton
+      type="primary"
+      long
+      @click="openFile()"
+    >
       导入Tiff文件
-    </button>
+    </AButton>
   </div>
 </template>

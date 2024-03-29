@@ -12,14 +12,14 @@ const sourceActive = ref<SourceType>('draw')
       <div class="tab-btn" :class="{ active: sourceActive === 'tiff' }" @click="sourceActive = 'tiff'">
         Tiff
       </div>
-      <div class="tab-btn" :class="{ active: sourceActive === 'geojson' }" @click="sourceActive = 'geojson'">
-        GeoJson
-      </div>
       <div class="tab-btn" :class="{ active: sourceActive === 'kml' }" @click="sourceActive = 'kml'">
         Kml
       </div>
       <div class="tab-btn" :class="{ active: sourceActive === 'shp' }" @click="sourceActive = 'shp'">
         Shp
+      </div>
+      <div class="tab-btn" :class="{ active: sourceActive === 'geojson' }" @click="sourceActive = 'geojson'">
+        GeoJson
       </div>
     </div>
     <SourceDrawData v-if="sourceActive === 'draw'" />

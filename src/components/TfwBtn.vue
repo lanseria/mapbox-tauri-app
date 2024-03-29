@@ -4,27 +4,43 @@ import { open } from '@tauri-apps/api/dialog'
 import { readTextFile } from '@tauri-apps/api/fs'
 
 const emits = defineEmits(['update:bounds'])
+
+const { loading, setLoading } = useLoading(false)
+
 async function openFile() {
-  const selected = await open({
-    multiple: false,
-    filters: [{
-      name: 'TIFF World File',
-      extensions: ['tfw'],
-    }],
-  })
-  if (selected === null) {
-    Message.warning('未选择文件')
+  try {
+    setLoading(true)
+    const selected = await open({
+      multiple: false,
+      filters: [{
+        name: 'TIFF World File',
+        extensions: ['tfw'],
+      }],
+    })
+    if (selected === null) {
+      Message.warning('未选择文件')
+    }
+    else {
+      const contents = await readTextFile(selected as string)
+      const lines = contents.split('\n').map(line => Number.parseFloat(line))
+      emits('update:bounds', lines)
+    }
   }
-  else {
-    const contents = await readTextFile(selected as string)
-    const lines = contents.split('\n').map(line => Number.parseFloat(line))
-    emits('update:bounds', lines)
+  catch (error: any) {
+    console.error(error)
+  }
+  finally {
+    setLoading(false)
   }
 }
 </script>
 
 <template>
-  <button class="ms-blue-btn flex-1 text-center" @click="openFile()">
+  <AButton
+    :loading="loading"
+    type="primary"
+    @click="openFile()"
+  >
     <slot />
-  </button>
+  </AButton>
 </template>
