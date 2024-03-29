@@ -1,3 +1,4 @@
+import type { FeatureCollection } from '@turf/turf'
 import type { Marker } from 'mapbox-gl'
 
 export type MouseState = 'default' | 'point' | 'line' | 'polygon' | 'circle'
@@ -42,5 +43,12 @@ export interface TiffData {
   base64: string
   coordinates: number[][]
   opacity: number
+  visibility: boolean
+}
+
+export interface KmlData {
+  id: string
+  name: string
+  geojson: FeatureCollection
   visibility: boolean
 }

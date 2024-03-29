@@ -2,7 +2,6 @@ export const MAP_DRAW_SOURCE_NAME = 'map-draw-source'
 export const MAP_DRAW_POINT_LAYER_NAME = 'map-draw-point-layer'
 export const MAP_DRAW_LINE_LAYER_NAME = 'map-draw-line-layer'
 export const MAP_DRAW_POLYGON_LAYER_NAME = 'map-draw-polygon-layer'
-export const MAP_DRAW_POLYGON_LINE_LAYER_NAME = 'map-draw-polygon-line-layer'
 //
 export const INIT_POINT_SIZE = 0.2
 export const INIT_POINT_COLOR = '#71717a'

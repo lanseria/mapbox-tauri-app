@@ -109,7 +109,12 @@ function handleMerge() {
     </div>
     <div class="h-1px bg-slate-2" />
     <div>
-      <MapLayerItem v-for="item in localTiffDataList" :key="item.id" :item="item" layer-type="tiff" />
+      <MapLayerItem
+        v-for="item in localTiffDataList"
+        :key="item.id"
+        :item="item"
+        layer-type="tiff"
+      />
     </div>
   </div>
 </template>

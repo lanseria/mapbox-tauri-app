@@ -1,25 +1,29 @@
-import type { TiffData } from '~/types'
-
-export function addDrawPointLayer() {
+import type { KmlData, TiffData } from '~/types'
+/**
+ * 公共添加点
+ * @param layerName
+ * @param sourceName
+ */
+function addPointLayer(layerName: string, sourceName: string) {
   const map = window.map
-  if (map.getLayer(MAP_DRAW_POINT_LAYER_NAME))
-    map.removeLayer(MAP_DRAW_POINT_LAYER_NAME)
+  if (map.getLayer(layerName))
+    map.removeLayer(layerName)
   map.addLayer({
-    id: MAP_DRAW_POINT_LAYER_NAME,
+    id: layerName,
     type: 'symbol',
-    source: MAP_DRAW_SOURCE_NAME,
+    source: sourceName,
     layout: {
-      'icon-image': ['get', 'color'],
-      'icon-size': ['get', 'size'],
+      'icon-image': ['coalesce', ['get', 'color'], INIT_POINT_COLOR],
+      'icon-size': ['coalesce', ['get', 'size'], INIT_POINT_SIZE],
       'text-field': ['get', 'name'],
-      'text-size': ['get', 'textSize'],
+      'text-size': ['coalesce', ['get', 'textSize'], INIT_POINT_TEXT_SIZE],
       'text-offset': [0, 0.5],
       'text-anchor': 'top',
       'icon-allow-overlap': true,
     },
     paint: {
-      'text-color': ['get', 'textFillColor'],
-      'text-halo-color': ['get', 'textStrokeColor'],
+      'text-color': ['coalesce', ['get', 'textFillColor'], INIT_POINT_TEXT_FILL_COLOR],
+      'text-halo-color': ['coalesce', ['get', 'textStrokeColor'], INIT_POINT_TEXT_HALO_COLOR],
       'text-halo-width': 1,
       'text-halo-blur': 0,
     },
@@ -29,36 +33,40 @@ export function addDrawPointLayer() {
       ['==', ['get', 'visibility'], true],
     ],
   })
-  map.on('click', MAP_DRAW_POINT_LAYER_NAME, (e) => {
+  map.on('click', layerName, (e) => {
     if (e.features) {
       console.warn(e.features[0].properties!.id)
       sessionDrawActiveId.value = e.features[0].properties!.id
     }
   })
-  map.on('mouseenter', MAP_DRAW_POINT_LAYER_NAME, (_e) => {
+  map.on('mouseenter', layerName, (_e) => {
     map.getCanvas().style.cursor = 'pointer'
   })
-  map.on('mouseleave', MAP_DRAW_POINT_LAYER_NAME, (_e) => {
+  map.on('mouseleave', layerName, (_e) => {
     map.getCanvas().style.cursor = ''
   })
 }
-
-export function addDrawLineLayer() {
+/**
+ * 公共添加线
+ * @param layerName
+ * @param sourceName
+ */
+function addLineLayer(layerName: string, sourceName: string) {
   const map = window.map
-  if (map.getLayer(MAP_DRAW_LINE_LAYER_NAME))
-    map.removeLayer(MAP_DRAW_LINE_LAYER_NAME)
+  if (map.getLayer(layerName))
+    map.removeLayer(layerName)
   map.addLayer({
-    id: MAP_DRAW_LINE_LAYER_NAME,
+    id: layerName,
     type: 'line',
-    source: MAP_DRAW_SOURCE_NAME,
+    source: sourceName,
     layout: {
       'line-cap': ['coalesce', ['get', 'line-cap'], 'round'],
       'line-join': ['coalesce', ['get', 'line-cap'], 'round'],
     },
     paint: {
-      'line-color': ['coalesce', ['get', 'color'], '#000'],
-      'line-width': ['coalesce', ['get', 'width'], 2],
-      'line-opacity': ['coalesce', ['get', 'opacity'], 1],
+      'line-color': ['coalesce', ['get', 'color'], INIT_LINE_COLOR],
+      'line-width': ['coalesce', ['get', 'width'], INIT_LINE_WIDTH],
+      'line-opacity': ['coalesce', ['get', 'opacity'], INIT_LINE_OPACITY],
     },
     filter: [
       'all',
@@ -66,32 +74,37 @@ export function addDrawLineLayer() {
       ['==', ['get', 'visibility'], true],
     ],
   })
-  map.on('click', MAP_DRAW_LINE_LAYER_NAME, (e) => {
+  map.on('click', layerName, (e) => {
     if (e.features) {
       console.warn(e.features[0].properties!.id)
       sessionDrawActiveId.value = e.features[0].properties!.id
     }
   })
-  map.on('mouseenter', MAP_DRAW_LINE_LAYER_NAME, (_e) => {
+  map.on('mouseenter', layerName, (_e) => {
     map.getCanvas().style.cursor = 'pointer'
   })
-  map.on('mouseleave', MAP_DRAW_LINE_LAYER_NAME, (_e) => {
+  map.on('mouseleave', layerName, (_e) => {
     map.getCanvas().style.cursor = ''
   })
 }
-
-export function addDrawPolygonLayer() {
-  console.warn('[addDrawPolygonLayer]')
+/**
+ * 公共添加多边形
+ * @param layerName
+ * @param sourceName
+ */
+function addPolygonLayer(layerName: string, sourceName: string) {
   const map = window.map
-  if (map.getLayer(MAP_DRAW_POLYGON_LAYER_NAME))
-    map.removeLayer(MAP_DRAW_POLYGON_LAYER_NAME)
+  const layerName_line = `${layerName}-line`
+  const layerName_fill = `${layerName}-fill`
+  if (map.getLayer(layerName_line))
+    map.removeLayer(layerName_line)
   map.addLayer({
-    id: MAP_DRAW_POLYGON_LAYER_NAME,
+    id: layerName_line,
     type: 'fill',
-    source: MAP_DRAW_SOURCE_NAME,
+    source: sourceName,
     paint: {
-      'fill-color': ['coalesce', ['get', 'fillColor'], '#000'],
-      'fill-opacity': ['coalesce', ['get', 'fillOpacity'], 1],
+      'fill-color': ['coalesce', ['get', 'fillColor'], INIT_POLYGON_FILL_COLOR],
+      'fill-opacity': ['coalesce', ['get', 'fillOpacity'], INIT_POLYGON_FILL_OPACITY],
     },
     filter: [
       'all',
@@ -99,19 +112,19 @@ export function addDrawPolygonLayer() {
       ['==', ['get', 'visibility'], true],
     ],
   })
-  if (map.getLayer(MAP_DRAW_POLYGON_LINE_LAYER_NAME))
-    map.removeLayer(MAP_DRAW_POLYGON_LINE_LAYER_NAME)
+  if (map.getLayer(layerName_fill))
+    map.removeLayer(layerName_fill)
   map.addLayer({
-    id: MAP_DRAW_POLYGON_LINE_LAYER_NAME,
+    id: layerName_fill,
     type: 'line',
-    source: MAP_DRAW_SOURCE_NAME,
+    source: sourceName,
     layout: {
       'line-join': 'round',
       'line-cap': 'round',
     },
     paint: {
-      'line-color': ['coalesce', ['get', 'lineColor'], '#000'],
-      'line-width': ['coalesce', ['get', 'lineWidth'], 1],
+      'line-color': ['coalesce', ['get', 'lineColor'], INIT_POLYGON_LINE_COLOR],
+      'line-width': ['coalesce', ['get', 'lineWidth'], INIT_POLYGON_LINE_WIDTH],
     },
     filter: [
       'all',
@@ -119,7 +132,7 @@ export function addDrawPolygonLayer() {
       ['==', ['get', 'visibility'], true],
     ],
   })
-  const layerNameArr = [MAP_DRAW_POLYGON_LAYER_NAME, MAP_DRAW_POLYGON_LINE_LAYER_NAME]
+  const layerNameArr = [layerName_line, layerName_fill]
   map.on('click', layerNameArr, (e) => {
     if (e.features) {
       console.warn(e.features[0].properties!.id)
@@ -132,6 +145,18 @@ export function addDrawPolygonLayer() {
   map.on('mouseleave', layerNameArr, (_e) => {
     map.getCanvas().style.cursor = ''
   })
+}
+
+export function addDrawPointLayer() {
+  addPointLayer(MAP_DRAW_POINT_LAYER_NAME, MAP_DRAW_SOURCE_NAME)
+}
+
+export function addDrawLineLayer() {
+  addLineLayer(MAP_DRAW_LINE_LAYER_NAME, MAP_DRAW_SOURCE_NAME)
+}
+
+export function addDrawPolygonLayer() {
+  addPolygonLayer(MAP_DRAW_POLYGON_LAYER_NAME, MAP_DRAW_SOURCE_NAME)
 }
 
 export function addDrawLayer() {
@@ -164,5 +189,45 @@ export function clearTiffLayer() {
     const layerName = `tif-layer-${item.id}`
     if (window.map.getLayer(layerName))
       window.map.removeLayer(layerName)
+  })
+}
+
+// for kml
+function addKmlPointLayer(layerName: string, sourceName: string) {
+  layerName = `${layerName}-point`
+  addPointLayer(layerName, sourceName)
+}
+function addKmlLineLayer(layerName: string, sourceName: string) {
+  layerName = `${layerName}-line`
+  addLineLayer(layerName, sourceName)
+}
+function addKmlPolygonLayer(layerName: string, sourceName: string) {
+  layerName = `${layerName}-polygon`
+  addPolygonLayer(layerName, sourceName)
+}
+export function addKmlLayer() {
+  localKmlDataList.value.forEach((item) => {
+    const sourceName = `kml-source-${item.id}`
+    const layerName = `kml-layer-${item.id}`
+    addKmlPointLayer(layerName, sourceName)
+    addKmlLineLayer(layerName, sourceName)
+    addKmlPolygonLayer(layerName, sourceName)
+  })
+}
+export function clearKmlLayer() {
+  localKmlDataList.value.forEach((item) => {
+    const layerName = `kml-layer-${item.id}`
+    const layerName_point = `${layerName}-point`
+    const layerName_line = `${layerName}-line`
+    const layerName_polygon = `${layerName}-polygon`
+    const layerName_polygon_line = `${layerName}-polygon-line`
+    if (window.map.getLayer(layerName_point))
+      window.map.removeLayer(layerName_point)
+    if (window.map.getLayer(layerName_line))
+      window.map.removeLayer(layerName_line)
+    if (window.map.getLayer(layerName_polygon))
+      window.map.removeLayer(layerName_polygon)
+    if (window.map.getLayer(layerName_polygon_line))
+      window.map.removeLayer(layerName_polygon_line)
   })
 }

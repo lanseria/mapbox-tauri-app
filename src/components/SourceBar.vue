@@ -4,7 +4,7 @@ const sourceActive = ref<SourceType>('draw')
 </script>
 
 <template>
-  <div class="h-full w-238px border-r-1px border-slate-2">
+  <div class="h-full w-238px flex flex-col border-r-1px border-slate-2">
     <div class="flex border-b-1px border-slate-2">
       <div class="tab-btn" :class="{ active: sourceActive === 'draw' }" @click="sourceActive = 'draw'">
         Draw
@@ -24,6 +24,7 @@ const sourceActive = ref<SourceType>('draw')
     </div>
     <SourceDrawData v-if="sourceActive === 'draw'" />
     <SourceTiffData v-if="sourceActive === 'tiff'" />
+    <SourceKmlData v-if="sourceActive === 'kml'" />
   </div>
 </template>
 

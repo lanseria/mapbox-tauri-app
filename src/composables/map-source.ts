@@ -1,5 +1,5 @@
 import { featureCollection } from '@turf/turf'
-import type { TiffData } from '~/types'
+import type { KmlData, TiffData } from '~/types'
 
 // for draw
 export function addDrawSource() {
@@ -44,6 +44,32 @@ export function clearTiffSource() {
   const map = window.map
   localTiffDataList.value.forEach((item) => {
     const sourceName = `tiff-source-${item.id}`
+    if (map.getSource(sourceName))
+      map.removeSource(sourceName)
+  })
+}
+
+// for kml
+export function addKmlSource() {
+  localKmlDataList.value.forEach((item) => {
+    const map = window.map
+    const sourceName = `kml-source-${item.id}`
+    const source: any = map.getSource(sourceName)
+    if (source) {
+      source.setData(item.geojson)
+    }
+    else {
+      map.addSource(sourceName, {
+        type: 'geojson',
+        data: item.geojson as any,
+      })
+    }
+  })
+}
+export function clearKmlSource() {
+  const map = window.map
+  localKmlDataList.value.forEach((item) => {
+    const sourceName = `kml-source-${item.id}`
     if (map.getSource(sourceName))
       map.removeSource(sourceName)
   })

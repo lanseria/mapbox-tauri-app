@@ -1,5 +1,5 @@
 import * as turf from '@turf/turf'
-import type { TiffData } from '~/types'
+import type { KmlData, TiffData } from '~/types'
 
 export const localDrawFeatureCollection = useLocalStorage('localDrawFeatureCollection', turf.featureCollection([]))
 
@@ -16,3 +16,15 @@ export function initTiffData(): TiffData {
 }
 
 export const localTiffDataList = useLocalStorage<TiffData[]>('localTiffDataList', [])
+
+// kml data
+export function initKmlData(): KmlData {
+  return {
+    id: '',
+    name: '',
+    geojson: turf.featureCollection([]),
+    visibility: true,
+  }
+}
+
+export const localKmlDataList = useLocalStorage<KmlData[]>('localKmlDataList', [])
