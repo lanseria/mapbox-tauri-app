@@ -28,7 +28,7 @@ async function openFile() {
       geojson: kmlToGeoJson(kml),
     })
     localKmlDataList.value.push(kmlData)
-    loadKml()
+    addKmlSource()
   }
 }
 </script>

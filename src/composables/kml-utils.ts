@@ -7,6 +7,7 @@ export function kmlToGeoJson(kml: Document) {
   geojson.features.forEach((feature) => {
     const id = nanoid()
     feature.properties = {
+      ...feature.properties,
       id: feature.properties?.id || feature.id || id,
       name: feature.properties?.name || id,
       visibility: true,

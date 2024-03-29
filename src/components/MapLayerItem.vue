@@ -34,6 +34,8 @@ const name = computed<string>(() => {
     return props.item.name
   if (props.layerType === 'kml')
     return props.item.name
+  if (props.layerType === 'shp')
+    return props.item.name
   return ''
 })
 const visibility = computed<boolean>(() => {
@@ -128,12 +130,19 @@ function removeFeature() {
     localKmlDataList.value = localKmlDataList.value.filter(kml => kml.id !== item.id)
     loadKml()
   }
+  if (props.layerType === 'shp') {
+    const item = props.item as KmlData
+    clearShpLayer()
+    clearShpSource()
+    localShpDataList.value = localShpDataList.value.filter(shp => shp.id !== item.id)
+    loadShp()
+  }
 }
 </script>
 
 <template>
   <div
-    class="group relative box-border h-40px flex cursor-default items-center gap-1 border-1px border-transparent px-2 hover:border-blue-5"
+    class="group relative box-border h-40px w-full flex cursor-default items-center gap-1 border-1px border-transparent px-2 hover:border-blue-5"
     :class="{
       active: id === sessionDrawActiveId,
     }"

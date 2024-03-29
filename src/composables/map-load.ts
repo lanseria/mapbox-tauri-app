@@ -73,18 +73,24 @@ export function loadTiff() {
   })
 }
 
-export function handleMapLoad(map: mapboxgl.Map) {
-  console.warn('[handleMapLoad]', map)
-  loadDraw()
-  loadTiff()
-  loadKml()
-  // eslint-disable-next-line ts/ban-ts-comment
-  // @ts-expect-error
-  console.warn('_layers', Object.keys(map.style._layers))
-}
-
 // for kml
 export function loadKml() {
   addKmlSource()
   addKmlLayer()
+}
+
+// for shp
+export function loadShp() {
+  addShpSource()
+  addShpLayer()
+}
+export function handleMapLoad(map: mapboxgl.Map) {
+  console.warn('[handleMapLoad]', map)
+  loadTiff()
+  loadDraw()
+  loadKml()
+  loadShp()
+  // eslint-disable-next-line ts/ban-ts-comment
+  // @ts-expect-error
+  console.warn('_layers', Object.keys(map.style._layers))
 }

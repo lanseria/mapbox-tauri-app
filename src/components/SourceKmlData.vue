@@ -6,7 +6,7 @@ import { localKmlDataList } from '~/composables'
   <div class="w-full flex shrink grow basis-0 flex-col overflow-y-hidden">
     <KmlBtn class="flex-none" />
     <div class="h-1px flex-none bg-slate-2" />
-    <div class="w-full overflow-y-scroll">
+    <div class="overflow-auto">
       <MapLayerItem
         v-for="item in localKmlDataList"
         :key="item.id"

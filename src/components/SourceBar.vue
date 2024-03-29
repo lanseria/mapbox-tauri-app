@@ -25,6 +25,7 @@ const sourceActive = ref<SourceType>('draw')
     <SourceDrawData v-if="sourceActive === 'draw'" />
     <SourceTiffData v-if="sourceActive === 'tiff'" />
     <SourceKmlData v-if="sourceActive === 'kml'" />
+    <SourceShpData v-if="sourceActive === 'shp'" />
   </div>
 </template>
 

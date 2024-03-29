@@ -74,3 +74,29 @@ export function clearKmlSource() {
       map.removeSource(sourceName)
   })
 }
+
+// for shp
+export function addShpSource() {
+  localKmlDataList.value.forEach((item) => {
+    const map = window.map
+    const sourceName = `shp-source-${item.id}`
+    const source: any = map.getSource(sourceName)
+    if (source) {
+      source.setData(item.geojson)
+    }
+    else {
+      map.addSource(sourceName, {
+        type: 'geojson',
+        data: item.geojson as any,
+      })
+    }
+  })
+}
+export function clearShpSource() {
+  const map = window.map
+  localKmlDataList.value.forEach((item) => {
+    const sourceName = `shp-source-${item.id}`
+    if (map.getSource(sourceName))
+      map.removeSource(sourceName)
+  })
+}

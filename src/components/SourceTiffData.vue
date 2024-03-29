@@ -78,9 +78,9 @@ function handleMerge() {
 </script>
 
 <template>
-  <div>
-    <TiffBtn />
-    <div class="w-full flex gap-2 px-2 py-1">
+  <div class="w-full flex shrink grow basis-0 flex-col overflow-y-hidden">
+    <TiffBtn class="flex-none" />
+    <div class="w-full flex flex-none gap-2 px-2 py-1">
       <TifBtn
         class="flex-1"
         @update:base64="updateBase64"
@@ -97,18 +97,18 @@ function handleMerge() {
         导入Tfw<IconCheck v-if="isLoadTfw" />
       </TfwBtn>
     </div>
-    <div class="w-full flex gap-2 px-2 py-1">
+    <div class="w-full flex flex-none gap-2 px-2 py-1">
       <AButton
         type="primary"
         long
         :disabled="!isLoadTif || !isLoadTfw"
         @click="handleMerge"
       >
-        合并Tfw/Tif文件
+        合并 Tfw/Tif 文件
       </AButton>
     </div>
-    <div class="h-1px bg-slate-2" />
-    <div>
+    <div class="h-1px flex-none bg-slate-2" />
+    <div class="w-full overflow-y-auto">
       <MapLayerItem
         v-for="item in localTiffDataList"
         :key="item.id"

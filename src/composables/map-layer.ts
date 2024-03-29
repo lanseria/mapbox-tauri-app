@@ -231,3 +231,43 @@ export function clearKmlLayer() {
       window.map.removeLayer(layerName_polygon_line)
   })
 }
+
+// for shp
+function addShpPointLayer(layerName: string, sourceName: string) {
+  layerName = `${layerName}-point`
+  addPointLayer(layerName, sourceName)
+}
+function addShpLineLayer(layerName: string, sourceName: string) {
+  layerName = `${layerName}-line`
+  addLineLayer(layerName, sourceName)
+}
+function addShpPolygonLayer(layerName: string, sourceName: string) {
+  layerName = `${layerName}-polygon`
+  addPolygonLayer(layerName, sourceName)
+}
+export function addShpLayer() {
+  localShpDataList.value.forEach((item) => {
+    const sourceName = `shp-source-${item.id}`
+    const layerName = `shp-layer-${item.id}`
+    addShpPointLayer(layerName, sourceName)
+    addShpLineLayer(layerName, sourceName)
+    addShpPolygonLayer(layerName, sourceName)
+  })
+}
+export function clearShpLayer() {
+  localShpDataList.value.forEach((item) => {
+    const layerName = `shp-layer-${item.id}`
+    const layerName_point = `${layerName}-point`
+    const layerName_line = `${layerName}-line`
+    const layerName_polygon = `${layerName}-polygon`
+    const layerName_polygon_line = `${layerName}-polygon-line`
+    if (window.map.getLayer(layerName_point))
+      window.map.removeLayer(layerName_point)
+    if (window.map.getLayer(layerName_line))
+      window.map.removeLayer(layerName_line)
+    if (window.map.getLayer(layerName_polygon))
+      window.map.removeLayer(layerName_polygon)
+    if (window.map.getLayer(layerName_polygon_line))
+      window.map.removeLayer(layerName_polygon_line)
+  })
+}
