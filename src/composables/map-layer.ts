@@ -271,3 +271,43 @@ export function clearShpLayer() {
       window.map.removeLayer(layerName_polygon_line)
   })
 }
+
+// for geojson
+function addGeoJsonPointLayer(layerName: string, sourceName: string) {
+  layerName = `${layerName}-point`
+  addPointLayer(layerName, sourceName)
+}
+function addGeoJsonLineLayer(layerName: string, sourceName: string) {
+  layerName = `${layerName}-line`
+  addLineLayer(layerName, sourceName)
+}
+function addGeoJsonPolygonLayer(layerName: string, sourceName: string) {
+  layerName = `${layerName}-polygon`
+  addPolygonLayer(layerName, sourceName)
+}
+export function addGeoJsonLayer() {
+  localGeoJsonDataList.value.forEach((item) => {
+    const sourceName = `geojson-source-${item.id}`
+    const layerName = `geojson-layer-${item.id}`
+    addGeoJsonPointLayer(layerName, sourceName)
+    addGeoJsonLineLayer(layerName, sourceName)
+    addGeoJsonPolygonLayer(layerName, sourceName)
+  })
+}
+export function clearGeoJsonLayer() {
+  localGeoJsonDataList.value.forEach((item) => {
+    const layerName = `geojson-layer-${item.id}`
+    const layerName_point = `${layerName}-point`
+    const layerName_line = `${layerName}-line`
+    const layerName_polygon = `${layerName}-polygon`
+    const layerName_polygon_line = `${layerName}-polygon-line`
+    if (window.map.getLayer(layerName_point))
+      window.map.removeLayer(layerName_point)
+    if (window.map.getLayer(layerName_line))
+      window.map.removeLayer(layerName_line)
+    if (window.map.getLayer(layerName_polygon))
+      window.map.removeLayer(layerName_polygon)
+    if (window.map.getLayer(layerName_polygon_line))
+      window.map.removeLayer(layerName_polygon_line)
+  })
+}

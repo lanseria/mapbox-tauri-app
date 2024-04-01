@@ -84,12 +84,18 @@ export function loadShp() {
   addShpSource()
   addShpLayer()
 }
+// for geojson
+export function loadGeoJson() {
+  addGeoJsonSource()
+  addGeoJsonLayer()
+}
 export function handleMapLoad(map: mapboxgl.Map) {
   console.warn('[handleMapLoad]', map)
   loadTiff()
   loadDraw()
   loadKml()
   loadShp()
+  loadGeoJson()
   // eslint-disable-next-line ts/ban-ts-comment
   // @ts-expect-error
   console.warn('_layers', Object.keys(map.style._layers))

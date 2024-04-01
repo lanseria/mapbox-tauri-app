@@ -15,7 +15,7 @@
     "up": "taze major -I"
   },
   "dependencies": {
-    "@arco-design/web-vue": "^2.55.0",
+    "@arco-design/web-vue": "^2.55.1",
     "@mapbox/mapbox-gl-draw": "^1.4.3",
     "@mapbox/mapbox-gl-language": "^1.0.1",
     "@mapbox/togeojson": "^0.16.2",
@@ -33,15 +33,15 @@
     "vue": "^3.4.21"
   },
   "devDependencies": {
-    "@antfu/eslint-config": "^2.11.4",
+    "@antfu/eslint-config": "^2.11.6",
     "@iconify-json/bi": "^1.1.23",
     "@iconify-json/carbon": "^1.1.31",
     "@iconify-json/gis": "^1.1.14",
     "@tauri-apps/cli": "^1.5.11",
     "@types/lodash-es": "^4.17.12",
-    "@types/mapbox-gl": "^3.1.0",
     "@types/mapbox__mapbox-gl-draw": "^1.4.6",
-    "@types/node": "^20.11.30",
+    "@types/mapbox-gl": "^3.1.0",
+    "@types/node": "^20.12.2",
     "@types/numeral": "^2.0.5",
     "@types/proj4": "^2.5.5",
     "@unocss/eslint-plugin": "^0.58.8",
@@ -59,7 +59,7 @@
     "unplugin-auto-expose": "0.3.0",
     "unplugin-auto-import": "^0.17.5",
     "unplugin-vue-components": "^0.26.0",
-    "vite": "^5.2.6",
+    "vite": "^5.2.7",
     "vue-tsc": "^2.0.7"
   }
 }

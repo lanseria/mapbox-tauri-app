@@ -39,3 +39,14 @@ export function initShpData(): KmlData {
   }
 }
 export const localShpDataList = useLocalStorage<KmlData[]>('localShpDataList', [])
+
+// geojson data
+export function initGeoJsonData(): KmlData {
+  return {
+    id: '',
+    name: '',
+    geojson: turf.featureCollection([]),
+    visibility: true,
+  }
+}
+export const localGeoJsonDataList = useLocalStorage<KmlData[]>('localGeoJsonDataList', [])

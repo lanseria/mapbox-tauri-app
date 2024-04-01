@@ -100,3 +100,29 @@ export function clearShpSource() {
       map.removeSource(sourceName)
   })
 }
+
+// for geojson
+export function addGeoJsonSource() {
+  localGeoJsonDataList.value.forEach((item) => {
+    const map = window.map
+    const sourceName = `geojson-source-${item.id}`
+    const source: any = map.getSource(sourceName)
+    if (source) {
+      source.setData(item.geojson)
+    }
+    else {
+      map.addSource(sourceName, {
+        type: 'geojson',
+        data: item.geojson as any,
+      })
+    }
+  })
+}
+export function clearGeoJsonSource() {
+  const map = window.map
+  localGeoJsonDataList.value.forEach((item) => {
+    const sourceName = `geojson-source-${item.id}`
+    if (map.getSource(sourceName))
+      map.removeSource(sourceName)
+  })
+}
