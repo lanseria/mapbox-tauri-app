@@ -11,7 +11,7 @@ import { localGeoJsonDataList } from '~/composables'
         v-for="item in localGeoJsonDataList"
         :key="item.id"
         :item="item"
-        layer-type="kml"
+        layer-type="geojson"
       />
     </div>
   </div>

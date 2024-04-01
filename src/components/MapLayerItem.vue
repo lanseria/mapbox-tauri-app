@@ -19,7 +19,8 @@ const LineFormModalRef = shallowRef()
 const PolygonFormModalRef = shallowRef()
 const TiffFormModalRef = shallowRef()
 // ref
-const kmlCollapse = ref(false)
+const collapse = ref(false)
+const showCollapse = computed(() => ['kml', 'shp', 'geojson'].includes(props.layerType))
 const id = computed<string>(() => {
   if (props.layerType === 'draw')
     return props.item.properties!.id
@@ -35,6 +36,8 @@ const name = computed<string>(() => {
   if (props.layerType === 'kml')
     return props.item.name
   if (props.layerType === 'shp')
+    return props.item.name
+  if (props.layerType === 'geojson')
     return props.item.name
   return ''
 })
@@ -137,6 +140,13 @@ function removeFeature() {
     localShpDataList.value = localShpDataList.value.filter(shp => shp.id !== item.id)
     loadShp()
   }
+  if (props.layerType === 'geojson') {
+    const item = props.item as KmlData
+    clearGeoJsonLayer()
+    clearGeoJsonSource()
+    localGeoJsonDataList.value = localGeoJsonDataList.value.filter(kml => kml.id !== item.id)
+    loadGeoJson()
+  }
 }
 </script>
 
@@ -148,8 +158,8 @@ function removeFeature() {
     }"
     @click="flyToItem()"
   >
-    <div v-if="layerType === 'kml'" @click="kmlCollapse = !kmlCollapse">
-      <div v-if="kmlCollapse" class="i-carbon-caret-down text-12px text-gray-5" />
+    <div v-if="showCollapse" @click="collapse = !collapse">
+      <div v-if="collapse" class="i-carbon-caret-down text-12px text-gray-5" />
       <div v-else class="i-carbon-caret-right text-12px text-gray-5" />
     </div>
     <div v-else class="i-carbon-caret-right text-12px text-transparent" />
@@ -190,7 +200,7 @@ function removeFeature() {
       </div>
     </div>
   </div>
-  <div v-if="layerType === 'kml' && kmlCollapse">
+  <div v-if="showCollapse && collapse">
     <MapLayerItem v-for="(it, k) in item.geojson.features" :key="k" :item="it" layer-type="draw" />
   </div>
   <PointFormModal ref="PointFormModalRef" />
