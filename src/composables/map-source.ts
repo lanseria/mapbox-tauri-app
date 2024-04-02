@@ -1,5 +1,5 @@
 import { featureCollection } from '@turf/turf'
-import type { KmlData, TiffData } from '~/types'
+import type { TiffData } from '~/types'
 
 // for draw
 export function addDrawSource() {
