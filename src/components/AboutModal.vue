@@ -1,6 +1,4 @@
 <script lang="ts" setup>
-import _ from 'lodash-es'
-
 const showModal = ref(false)
 
 function handleSubmit() {

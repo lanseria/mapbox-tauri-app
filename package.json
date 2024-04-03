@@ -12,7 +12,8 @@
     "ts-check": "vue-tsc --noEmit",
     "preview": "vite preview",
     "check": "cd src-tauri && cargo check",
-    "up": "taze major -I"
+    "up": "taze major -I",
+    "postinstall": "npx simple-git-hooks"
   },
   "dependencies": {
     "@arco-design/web-vue": "^2.55.1",
