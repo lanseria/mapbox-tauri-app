@@ -50,3 +50,9 @@ export function initGeoJsonData(): KmlData {
   }
 }
 export const localGeoJsonDataList = useLocalStorage<KmlData[]>('localGeoJsonDataList', [])
+
+export const localHillshadeExaggeration = useLocalStorage('localHillshadeExaggeration', 0.5)
+export const localHillshadeAccentColor = useLocalStorage('localHillshadeAccentColor', '#000000')
+export const localHillshadeShadowColor = useLocalStorage('localHillshadeShadowColor', '#000000')
+export const localHillshadeHighlightColor = useLocalStorage('localHillshadeHighlightColor', '#FFFFFF')
+export const localHillshadeIlluminationDirection = useLocalStorage('localHillshadeIlluminationDirection', 335)

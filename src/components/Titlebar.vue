@@ -2,8 +2,22 @@
 import { setSourceBarVisible } from '~/composables'
 
 const AboutModalRef = shallowRef()
+const HillShadingModalRef = shallowRef()
 function handleAbout() {
   AboutModalRef.value.open()
+}
+
+function handleLayerSave() {
+  const canvas = window.map.getCanvas()
+  const imgData = canvas.toDataURL('image/png')
+  const link = document.createElement('a')
+  link.href = imgData
+  link.download = 'map.png'
+  link.click()
+}
+
+function handleHillShading() {
+  HillShadingModalRef.value.open()
 }
 </script>
 
@@ -15,9 +29,16 @@ function handleAbout() {
         Mapbox Tauri App
       </div>
     </div>
-    <div>
-      <IconBtn icon-name="i-carbon-help" tooltip-name="关于" @click="handleAbout" />
-      <AboutModal ref="AboutModalRef" />
+    <div class="flex gap-1">
+      <div>
+        <IconBtn icon-name="i-carbon-mountain" tooltip-name="山体阴影" @click="handleHillShading" />
+        <HillShadingModal ref="HillShadingModalRef" />
+      </div>
+      <IconBtn icon-name="i-carbon-save" tooltip-name="导出图片" @click="handleLayerSave" />
+      <div>
+        <IconBtn icon-name="i-carbon-help" tooltip-name="关于" @click="handleAbout" />
+        <AboutModal ref="AboutModalRef" />
+      </div>
     </div>
   </div>
 </template>

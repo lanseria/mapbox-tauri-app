@@ -1,4 +1,28 @@
 import type { TiffData } from '~/types'
+// dem hill
+export function setDemHillLayer() {
+  const map = window.map
+  map.setPaintProperty('hillshading', 'hillshade-exaggeration', localHillshadeExaggeration.value)
+  map.setPaintProperty('hillshading', 'hillshade-accent-color', localHillshadeAccentColor.value)
+  map.setPaintProperty('hillshading', 'hillshade-shadow-color', localHillshadeShadowColor.value)
+  map.setPaintProperty('hillshading', 'hillshade-highlight-color', localHillshadeHighlightColor.value)
+  map.setPaintProperty('hillshading', 'hillshade-illumination-direction', localHillshadeIlluminationDirection.value)
+}
+export function addDemHillLayer() {
+  const map = window.map
+  map.addLayer({
+    id: 'hillshading',
+    source: 'dem',
+    type: 'hillshade',
+    paint: {
+      'hillshade-exaggeration': localHillshadeExaggeration.value, // 默认夸张程度
+      'hillshade-accent-color': localHillshadeAccentColor.value, // 默认强调色
+      'hillshade-shadow-color': localHillshadeShadowColor.value, // 默认阴影色
+      'hillshade-highlight-color': localHillshadeHighlightColor.value, // 默认高亮色
+      'hillshade-illumination-direction': localHillshadeIlluminationDirection.value, // 默认光源方向
+    },
+  })
+}
 /**
  * 公共添加点
  * @param layerName

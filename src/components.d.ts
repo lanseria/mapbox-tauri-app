@@ -20,6 +20,7 @@ declare module 'vue' {
     ATypographyText: typeof import('@arco-design/web-vue')['TypographyText']
     DbfBtn: typeof import('./components/DbfBtn.vue')['default']
     GeoJsonBtn: typeof import('./components/GeoJsonBtn.vue')['default']
+    HillShadingModal: typeof import('./components/HillShadingModal.vue')['default']
     IconBgColors: typeof import('@arco-design/web-vue/es/icon')['IconBgColors']
     IconBtn: typeof import('./components/IconBtn.vue')['default']
     IconCheck: typeof import('@arco-design/web-vue/es/icon')['IconCheck']

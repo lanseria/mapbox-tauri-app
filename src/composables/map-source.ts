@@ -1,6 +1,13 @@
 import { featureCollection } from '@turf/turf'
 import type { TiffData } from '~/types'
-
+// for dem hill
+export function addDemSource() {
+  const map = window.map
+  map.addSource('dem', {
+    type: 'raster-dem',
+    url: 'mapbox://mapbox.mapbox-terrain-dem-v1',
+  })
+}
 // for draw
 export function addDrawSource() {
   refreshPointColor()

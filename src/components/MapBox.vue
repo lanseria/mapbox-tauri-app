@@ -18,6 +18,7 @@ onMounted(() => {
     attributionControl: false,
     dragRotate: false, // 禁用旋转
     pitchWithRotate: false, // 禁用倾斜
+    preserveDrawingBuffer: true,
   })
   window.map = map
   // draw
