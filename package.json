@@ -12,8 +12,7 @@
     "ts-check": "vue-tsc --noEmit",
     "preview": "vite preview",
     "check": "cd src-tauri && cargo check",
-    "up": "taze major -I",
-    "postinstall": "npx simple-git-hooks"
+    "up": "taze major -I"
   },
   "dependencies": {
     "@arco-design/web-vue": "^2.55.1",
@@ -53,9 +52,6 @@
     "cross-env": "^7.0.3",
     "eslint": "^8.57.0",
     "eslint-plugin-format": "^0.1.0",
-    "less": "^4.2.0",
-    "lint-staged": "^15.2.2",
-    "simple-git-hooks": "^2.11.1",
     "taze": "^0.13.3",
     "typescript": "^5.4.3",
     "unocss": "^0.58.9",
