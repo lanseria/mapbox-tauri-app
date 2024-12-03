@@ -91,6 +91,7 @@ export function loadGeoJson() {
 }
 export function handleMapLoad(map: mapboxgl.Map) {
   console.warn('[handleMapLoad]', map)
+  //
   loadTiff()
   loadDraw()
   loadKml()
@@ -99,4 +100,19 @@ export function handleMapLoad(map: mapboxgl.Map) {
   // eslint-disable-next-line ts/ban-ts-comment
   // @ts-expect-error
   console.warn('_layers', Object.keys(map.style._layers))
+
+  map.addSource('dem', {
+    type: 'raster-dem',
+    url: 'mapbox://mapbox.mapbox-terrain-dem-v1',
+  })
+  map.addLayer(
+    {
+      id: 'hillshading',
+      source: 'dem',
+      type: 'hillshade',
+    },
+    // Insert below land-structure-polygon layer,
+    // where hillshading sits in the Mapbox Streets style.
+    // 'land-structure-polygon',
+  )
 }

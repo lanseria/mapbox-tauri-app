@@ -11,11 +11,13 @@ const mapContainer = shallowRef()
 onMounted(() => {
   map = new mapboxgl.Map({
     container: mapContainer.value,
-    style: 'mapbox://styles/lanseria/clhluh3n100kq01r87c9deet0',
+    style: 'mapbox://styles/lanseria/cm48mh0wn01at01sdbxzkb6o5', // 基础样式
     center: [108.84, 31.06] as LngLatLike,
     zoom: 3.5,
     hash: true,
     attributionControl: false,
+    dragRotate: false, // 禁用旋转
+    pitchWithRotate: false, // 禁用倾斜
   })
   window.map = map
   // draw
